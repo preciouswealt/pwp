@@ -162,7 +162,7 @@
             <p><b>อสังหาริมทรัพย์ที่ประกาศขาย</b></p>
             <div class="owl-carousel owl-theme">
                 <?php foreach ($properties4 as $ipro) { ?>
-                <?php if ($ipro->type_product == '4' or $ipro->type_product == '6') { ?>
+                <?php if ($ipro->type_product == '4' or $ipro->type_product == '6' or $ipro->type_product == '7' or $ipro->type_product == '8') { ?>
                 <div class="item">
                     <div class="card">
                         <img src="<?php echo base_url('property/'.$ipro->p_code .'/'. $ipro->p_image); ?>"

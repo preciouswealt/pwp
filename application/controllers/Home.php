@@ -274,7 +274,8 @@ class Home extends CI_Controller
 	}
 	public function propertysale()
 	{
-		$IDtype = '4';
+		$IDtype = '4'; 
+		//('4','6','7','8');
 	
 		$typeproperties = $this->input->GET('typeproperties');
 
@@ -333,7 +334,6 @@ class Home extends CI_Controller
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		$per_pages = $config["per_page"];
-
 
 		$data['pagelinks'] = $this->pagination->create_links();
 		$data['province'] = $this->Homemodel->province();
@@ -405,7 +405,6 @@ class Home extends CI_Controller
 
 				if ($this->upload->do_upload('file')) {
 					$this->Homemodel->inserttouchimagedeed($filedeed,$idcode);
-				
 					$uploadData = $this->upload->data();
 				}
 			}

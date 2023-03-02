@@ -37,7 +37,6 @@ class Control_admin extends CI_Controller
 				} 
 				$this->session->set_userdata(array('login_id'=> $id,'username' => $user_name,'fristname'=> $fristname,'lastname'=> $lastname));
 				redirect('Control_admin/Indexview');
-            
 			}
 			else
 			{
@@ -142,6 +141,9 @@ class Control_admin extends CI_Controller
 			$this->load->view('Backend/Login', $data);
 		} else {
 	    $data['province'] = $this->Admin_model->province();
+		$data['tppt'] = $this->Admin_model->selecttypeppt();
+		$data['tpd'] = $this->Admin_model->selecttypepd();
+		
 		$data['Property_index'] = $this->Admin_model->Property_model_index();
 		$data['ShowPage'] = 'Backend/Insertproperty/Property_index';
 		$this->load->view('Backend/Indexview', $data);
@@ -158,7 +160,10 @@ class Control_admin extends CI_Controller
 
         //    $imageproperty =   $this->input->post("imageproperty");
         //    $imageproperty2  =  $this->input->post("imageproperty2");
-           $typepoduct  =  $this->input->post("typepoduct");
+		
+		   $codepoduct  =  $this->input->post("codepoduct");
+		   $codeproperty  =  $this->input->post("codeproperty");
+           $typeproduct  =  $this->input->post("typeproduct");
            $typeproperty  =  $this->input->post("typeproperty");
            $titleroperty =    $this->input->post("titleroperty");
            $detailproperty =   $this->input->post("detailproperty");
@@ -175,7 +180,8 @@ class Control_admin extends CI_Controller
            $percen  =  $this->input->post("percen");
            $typeopen =  $this->input->post("typeopen");
            $limit_price =   $this->input->post("limit_price");
-
+		   $start_date =   $this->input->post("start_date");
+		   $end_date =   $this->input->post("end_date");
 
 		   if (isset($_FILES['imageproperty']) && !empty($_FILES['imageproperty'])) {
 			$no_files = count($_FILES["imageproperty"]['name']);
@@ -190,19 +196,19 @@ class Control_admin extends CI_Controller
 				$_FILES['file']['tmp_name'] = $_FILES['imageproperty']['tmp_name'][$i];
 				$_FILES['file']['error'] = $_FILES['imageproperty']['error'][$i];
 				$_FILES['file']['size'] = $_FILES['imageproperty']['size'][$i];
-				$config['upload_path']          = './property/'.$typeproperty;
+				$config['upload_path']          = './property/'.$codeproperty;
 				$config['allowed_types']         = 'pdf|Pdf|jpg|jpeg|png';
 				$config['remove_spaces'] = 'FALSE';
 
 				$this->load->library('upload', $config);
 				$this->upload->initialize($config);
-				if(!is_dir('./property/'.$typeproperty)) {
-					mkdir('./property/'.$typeproperty, 0777, true);
+				if(!is_dir('./property/'.$codeproperty)) {
+					mkdir('./property/'.$codeproperty, 0777, true);
 				}
 
 				if ($this->upload->do_upload('file')) {
-					// $this->Homemodel->inserttouchimagedeed($imageproperty,$typeproperty);
-				
+					$this->Admin_model->insertumgheader($codepoduct,$codeproperty,$imageproperty);
+					$this->Admin_model->Update_image($codepoduct,$codeproperty,$imageproperty);
 					$uploadData = $this->upload->data();
 				}
 			}
@@ -221,28 +227,47 @@ class Control_admin extends CI_Controller
 				$_FILES['file']['tmp_name'] = $_FILES['imageproperty2']['tmp_name'][$i];
 				$_FILES['file']['error'] = $_FILES['imageproperty2']['error'][$i];
 				$_FILES['file']['size'] = $_FILES['imageproperty2']['size'][$i];
-				$config['upload_path']          = './property/'.$typeproperty;
+				$config['upload_path']          = './property/'.$codeproperty;
 				$config['allowed_types']         = 'pdf|Pdf|jpg|jpeg|png';
 				$config['remove_spaces'] = 'FALSE';
 			
 				$this->load->library('upload', $config);
 				$this->upload->initialize($config);
 	
-				if(!is_dir('./property/'.$typeproperty)) {
-					mkdir('./property/'.$typeproperty, 0777, true);
+				if(!is_dir('./property/'.$codeproperty)) {
+					mkdir('./property/'.$codeproperty, 0777, true);
 				}
 				if ($this->upload->do_upload('file')) {
-					// $this->Homemodel->inserttouchimage($imageproperty2,$typeproperty);
+					$this->Admin_model->inserimgdetail($codepoduct,$codeproperty,$imageproperty2);
 					$uploadData = $this->upload->data();
 				
 				}
 			}
 		}
 
+		// $insert = true;
+		$insert = $this->Admin_model->Insert_property($codepoduct,
+	$codeproperty,
+	$typeproduct,
+	$typeproperty,
+	$titleroperty ,
+	$detailproperty,
+	$address,
+	$province ,
+	$dristrict,
+	$sub_dristrict  ,
+	$postcode ,
+	$squarerai,
+	$squarengan ,
+	$squarewah ,
+	$squaremeter,
+	$price ,
+	$percen,
+	$typeopen,
+	$limit_price,
+	$start_date,
+	$end_date);
 
-
-
-		$insert = true;
 		if ($insert) {
 			$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2');
 		} else {
@@ -780,15 +805,16 @@ class Control_admin extends CI_Controller
 	{
 		$postcode = trim($this->input->get('postcode'));
 		$this->session->set_userdata("postcode", $postcode);
+		$res = $this->Admin_model->subdistrictpost($postcode );
 		// $this->session->set_userdata("carYear2", $year);
 		// $res = $this->Admin_model->subposcode($postcode);
 		$result = array();
-		// foreach ($res as $r) {
+		foreach ($res as $r) {
 			$result[] = array(
-				'zipcode' => $postcode
+				'zipcode' => $r->zipcode
 				
 			);
-		// }
+		}
 		echo json_encode($result);
 	}
 	

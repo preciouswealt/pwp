@@ -59,7 +59,7 @@ class Homemodel extends CI_Model
 		INNER JOIN th_province as P ON PR.p_province = P.id 
 		INNER JOIN th_district as D ON PR.p_district = D.id 
 		INNER JOIN th_subdistrict as SD ON PR.p_subdistrict = SD.id   
-		where PR.p_status = '1' and PR.type_product in ('4','6') limit 5";
+		where PR.p_status = '1' and PR.type_product in ('4','6','7','8') limit 5";
 		// $query = "SELECT * FROM properties  where p_status = '1' and type_product = '4' limit 5  ";
 		return $this->db->query($query)->result();
 	}
@@ -119,14 +119,19 @@ class Homemodel extends CI_Model
         } else {
             $statusmatchs = " AND T.status_match = '".$statusmatch."'";
         }
+		if($IDtype == '4'){
+			$type_product = "T.type_product in ('4','6','7','8')";
+		}else{
+			$type_product = "T.type_product = '".$IDtype."'";
+		}
 		// $query = "SELECT * FROM properties  where p_status = '1' And type_product = '$IDtype'  LIMIT $per_pages OFFSET $page ";
-		 $query = "SELECT T.id ,T.p_id ,T.p_code,T.p_name ,T.p_detail ,T.p_address ,T.p_province,T.p_image,T.p_district ,T.p_subdistrict ,T.p_status ,T.p_savedate ,T.p_updatedate,
+		$query = "SELECT T.id ,T.p_id ,T.p_code,T.p_name ,T.p_detail ,T.p_address ,T.p_province,T.p_image,T.p_district ,T.p_subdistrict ,T.p_status ,T.p_savedate ,T.p_updatedate,
 			T.p_postcode ,T.p_deed ,T.p_deed,T.percen ,T.status_match ,T.square_wah ,T.type_product ,T.p_typeproperties , T.p_price ,T.square_meter ,
 			P.name_th as province ,D.name_th as district ,SUP.name_th as supdistrict,SUP.zipcode,T.price_limit  FROM properties as T 
 			INNER JOIN th_province AS P ON T.p_province = P.id 
 			INNER JOIN th_district AS D ON T.p_province = D.province_id AND T.p_district = D.id 
 			INNER JOIN th_subdistrict AS SUP ON T.p_province = D.province_id AND T.p_district = SUP.district_id AND T.p_subdistrict = SUP.id
-			WHERE T.type_product = '$IDtype' and T.p_status = '1' $typepropertiess $provinces  $dristricts $sub_dristricts  $sizes   $statusmatchs LIMIT $per_pages OFFSET $page";
+			WHERE $type_product and T.p_status = '1' $typepropertiess $provinces  $dristricts $sub_dristricts  $sizes   $statusmatchs LIMIT $per_pages OFFSET $page";
 		return $this->db->query($query)->result();
 	}
 	public function propertiesdetail($IDtype)
