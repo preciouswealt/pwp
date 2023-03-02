@@ -157,7 +157,11 @@ class Admin_model extends CI_Model
 	}
 	public function Property_model_index()
 	{
-		$query = "SELECT * ,ROW_NUMBER() OVER(ORDER BY id) as row FROM properties ";
+		// $query = "SELECT * ,ROW_NUMBER() OVER(ORDER BY id) as row FROM properties ";
+		$query = "SELECT p.id,p.p_touch,p.p_id,p.p_code,p.p_name,p.p_savedate,p.p_status,p.status_match,p.p_updatedate,td.productname,tp.nametype ,ROW_NUMBER() OVER(ORDER BY p.id) as row 
+FROM properties as p 
+INNER JOIN  typeproduct as td ON p.type_product = td.id
+INNER JOIN  typeproperties as tp ON p.p_typeproperties = tp.id";
 		return $this->db->query($query)->result();
 	}
 
@@ -292,6 +296,17 @@ class Admin_model extends CI_Model
 		$query = "SELECT * FROM typeproduct";
 		return $this->db->query($query)->result();
 	}
+	public function selectstatusmatch($SM_id){
+		$query = " SELECT status_match FROM properties WHERE id = '$SM_id'  ";
+			return $this->db->query($query)->result();;
+		}
+	public function Update_statusmatch($Status, $SM_id){
+		$query = "  UPDATE properties
+			SET status_match = '$Status' WHERE id = '$SM_id'  ";
+			return $this->db->query($query);
+		}
+
+	
 }
 
 // $typepoduct,

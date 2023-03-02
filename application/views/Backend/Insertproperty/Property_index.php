@@ -12,6 +12,32 @@
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+
+    .tableFix {
+        /* Scrollable parent element */
+        position: relative;
+        overflow: auto;
+        height: 100px;
+    }
+
+    .tableFix table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .tableFix th,
+    .tableFix td {
+        padding: 8px;
+        text-align: left;
+    }
+
+    .tableFix thead th {
+        position: sticky;
+        /* Edge, Chrome, FF */
+        top: 0px;
+        background: #808080;
+        /* Some background is needed */
+    }
     </style>
     <div class="container-fluid px-4">
         <h1 class="mt-4">ทรัพย์</h1>
@@ -24,7 +50,7 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal"
                     data-target="#insertmodal">เพิ่มข้อมูลทรัพย์</button>
                 <br /><br />
-                <div style="overflow: auto;width: 100%;height:450px">
+                <div style="overflow: auto;width: 100%;height:450px" class="tableFix">
                     <table class="table table-bordered">
                         <!-- <div style="overflow-x:auto;">
                     <table > -->
@@ -50,6 +76,8 @@
                         <tbody>
                             <?php foreach ($Property_index as $Property) { ?>
                             <tr>
+
+                                <!-- p.p_touch,p.p_id,p.p_code,p.p_name,p.p_savedate,p.p_status,p.p_updatedate,td.productname,tp.nametype -->
                                 <td scope="row"><?php echo $Property->row ?></td>
                                 <td><?php echo $Property->p_touch ?></td>
                                 <td><?php echo $Property->p_id ?></td>
@@ -63,43 +91,52 @@
                             </td> -->
                                 <td><?php echo $Property->p_name ?></td>
                                 <td><?php echo $Property->p_savedate ?></td>
-                                <td><?php echo $Property->p_savedate ?></td>
                                 <td><?php echo $Property->p_updatedate ?></td>
+                                <td><?php echo $Property->nametype ?></td>
+                                <td><?php echo $Property->productname ?></td>
                                 <td>
-                                    <!-- </?php echo $Property->status_new ?> -->
-                                    <!-- <div id="Status</?php echo  $Property->id;?>">
-                                    </?php if($Property->status_new== 0) {?>
-                                    <button type="button" class="btn btn-danger btn-xs"
-                                        style="color:white;font-size: 13px;border-radius: 5px;"
-                                        onclick="statusupdate(</?php echo $Property->id ;?>)">
-                                        ปิดการใช้งาน
+                                    <!-- </?php echo $Property->status_match ?> -->
+
+                                    <div id="Status<?php echo  $Property->id;?>">
+                                        <?php if($Property->status_match == 'done') {?>
+                                        <button type="button" class="btn btn-danger btn-xs"
+                                            style="color:white;font-size: 13px;border-radius: 5px;"
+                                            onclick="statusmatchupdate(<?php echo $Property->id ;?>)">
+                                            done
+                                        </button>
+                                        <?php }else if($Property->status_match == 'available') { ?>
+                                        <button type="button" class="btn btn-success btn-xs"
+                                            style="color:white;font-size: 13px;border-radius: 5px;"
+                                            onclick="statusmatchupdate(<?php echo $Property->id ;?>)">
+                                            available
+                                        </button>
+                                        <?php } ?>
+
+                                </td>
+                                <td>
+                                    <!-- </?php echo $Property->p_status ?> -->
+                                    <div id="Status<?php echo  $Property->id;?>">
+                                        <?php if($Property->p_status== 0) {?>
+                                        <button type="button" class="btn btn-danger btn-xs"
+                                            style="color:white;font-size: 13px;border-radius: 5px;"
+                                            onclick="statusupdate(<?php echo $Property->id ;?>)">
+                                            ปิดการใช้งาน
+                                        </button>
+                                        <?php }else if($Property->p_status == 1) { ?>
+                                        <button type="button" class="btn btn-success btn-xs"
+                                            style="color:white;font-size: 13px;border-radius: 5px;"
+                                            onclick="statusupdate(<?php echo $Property->id ;?>)">
+                                            เปิดการใช้งาน
+                                        </button>
+                                        <?php } ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-xs"
+                                        style="color:white;font-size: 13px;border-radius: 5px;">
+                                        ดูรายละเอียด
                                     </button>
-                                    </?php }else if($Property->status_new == 1) { ?>
-                                    <button type="button" class="btn btn-success btn-xs"
-                                        style="color:white;font-size: 13px;border-radius: 5px;"
-                                        onclick="statusupdate(</?php echo $Property->id ;?>)">
-                                        เปิดการใช้งาน
-                                    </button>
-                                    </?php } ?>
-                                </div> -->
                                 </td>
-                                <td> </td>
-                                <td>
-                                    <!-- </?php echo $Property->image_new ?> -->
-                                </td>
-                                <td>
-                                    <!-- <button type="button" onclick="showdetail(id = '</?php echo $Property->id ?>')"
-                                    class="btn btn-primary" data-toggle="modal"
-                                    data-target="#exampleModal">ดูรายละเอียด</button> -->
-                                </td>
-                                <!-- 
-                            <td>
-                                <button type="button" class="btn btn-danger btn-xs"
-                                    style="color:white;font-size: 13px;border-radius: 5px;"
-                                    onclick="deletenews(id ='</?php echo $Property->id ;?>', imag = '</?php echo $Property->image_new ?>')">
-                                    ลบ
-                                </button>
-                            </td> -->
                             </tr>
                             <?php } ?>
                         </tbody>
@@ -125,6 +162,33 @@ function showdetail(id) {
     }).done(function(data) {
         $('#newsdetail').html(data);
     });
+}
+
+function statusmatchupdate(SM_id) {
+    var datas = "SM_id=" + SM_id;
+    swal({
+            title: "change status?",
+            text: "",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }, function(isConfirm) {
+        if (isConfirm) {
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('Control_admin/Statusmatch')?>",
+                    data: datas,
+                }).done(function(data) {
+                    // console.log(data);
+                    swal("การเปลี่ยนสถานะของคุณสำเร็จ", {
+                        icon: "success",
+                    });
+                    $('#Status' + SM_id).html(data);
+                });
+            } else {
+                swal("ยกเลิกการเปลี่ยนสถานะสำเร็จ!");
+            }
+        });
 }
 
 function statusupdate(News_ID) {

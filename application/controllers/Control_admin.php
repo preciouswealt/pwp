@@ -817,5 +817,41 @@ class Control_admin extends CI_Controller
 		}
 		echo json_encode($result);
 	}
+
+	public function Statusmatch (){
+		$SM_id = $this->input->POST('SM_id');
+		$Get_match = $this->Admin_model->selectstatusmatch($SM_id);
+		if ($Get_match[0]->status_match == 'available') {
+			$Status = 'done';
+			$this->Admin_model->Update_statusmatch($Status, $SM_id);
+			echo "<button type='button' class='btn btn-danger btn-xs' style='color:white;font-size: 13px;border-radius: 5px;' onclick='statusmatchupdate(" . $SM_id . ")'>
+			done
+			</button>";
+		} else {
+			$Status = 'available';
+			$this->Admin_model->Update_statusmatch($Status, $SM_id);
+			echo " <button type='button' class='btn btn-success btn-xs' style='color:white;font-size: 13px;border-radius: 5px;'onclick='statusmatchupdate(" . $SM_id . ")'>
+			available
+			</button>";
+		}
+	}
+
+	public function Statusshowe (){
+		$SM_id = $this->input->POST('SM_id');
+		$Get_match = $this->Admin_model->selectstatusmatch($SM_id);
+		if ($Get_match[0]->status_match == 'available') {
+			$Status = 'done';
+			$this->Admin_model->Update_statusmatch($Status, $SM_id);
+			echo "<button type='button' class='btn btn-danger btn-xs' style='color:white;font-size: 13px;border-radius: 5px;' onclick='statusmatchupdate(" . $SM_id . ")'>
+			done
+			</button>";
+		} else {
+			$Status = 'available';
+			$this->Admin_model->Update_statusmatch($Status, $SM_id);
+			echo " <button type='button' class='btn btn-success btn-xs' style='color:white;font-size: 13px;border-radius: 5px;'onclick='statusmatchupdate(" . $SM_id . ")'>
+			available
+			</button>";
+		}
+	}
 	
 }
