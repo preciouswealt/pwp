@@ -47,8 +47,10 @@
                 ข้อมูล ทรัพย์
             </div>
             <div class="card-body">
-                <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#insertmodal">เพิ่มข้อมูลทรัพย์</button>
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#insertmodal">เพิ่มข้อมูลทรัพย์</button> -->
+  
+                    <a class="btn btn-primary" href="<?php echo site_url('Control_admin/Propertyforminsert'); ?>">เพิ่มข้อมูลทรัพย์</a>
                 <br /><br />
                 <div style="overflow: auto;width: 100%;height:450px" class="tableFix">
                     <table class="table table-bordered">
@@ -115,27 +117,24 @@
                                 </td>
                                 <td>
                                     <!-- </?php echo $Property->p_status ?> -->
-                                    <div id="Status<?php echo  $Property->id;?>">
+                                    <div id="Statusshow<?php echo  $Property->id;?>">
                                         <?php if($Property->p_status== 0) {?>
                                         <button type="button" class="btn btn-danger btn-xs"
                                             style="color:white;font-size: 13px;border-radius: 5px;"
-                                            onclick="statusupdate(<?php echo $Property->id ;?>)">
+                                            onclick="statusshowupdate(<?php echo $Property->id ;?>)">
                                             ปิดการใช้งาน
                                         </button>
                                         <?php }else if($Property->p_status == 1) { ?>
                                         <button type="button" class="btn btn-success btn-xs"
                                             style="color:white;font-size: 13px;border-radius: 5px;"
-                                            onclick="statusupdate(<?php echo $Property->id ;?>)">
+                                            onclick="statusshowupdate(<?php echo $Property->id ;?>)">
                                             เปิดการใช้งาน
                                         </button>
                                         <?php } ?>
                                     </div>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-xs"
-                                        style="color:white;font-size: 13px;border-radius: 5px;">
-                                        ดูรายละเอียด
-                                    </button>
+                                    <a href="<?php echo site_url('Control_admin/Propertyedit/' . $Property->id . ''); ?>">ดูรายละเอียด</a>
                                 </td>
                             </tr>
                             <?php } ?>
@@ -167,32 +166,27 @@ function showdetail(id) {
 function statusmatchupdate(SM_id) {
     var datas = "SM_id=" + SM_id;
     swal({
-            title: "change status?",
-            text: "",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        }, function(isConfirm) {
+        title: "change status?",
+        text: "",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }, function(isConfirm) {
         if (isConfirm) {
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo site_url('Control_admin/Statusmatch')?>",
-                    data: datas,
-                }).done(function(data) {
-                    // console.log(data);
-                    swal("การเปลี่ยนสถานะของคุณสำเร็จ", {
-                        icon: "success",
-                    });
-                    $('#Status' + SM_id).html(data);
-                });
-            } else {
-                swal("ยกเลิกการเปลี่ยนสถานะสำเร็จ!");
-            }
-        });
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('Control_admin/Statusmatch')?>",
+                data: datas,
+            }).done(function(data) {
+                // console.log(data);
+                $('#Status' + SM_id).html(data);
+            });
+        }
+    });
 }
 
-function statusupdate(News_ID) {
-    var datas = "News_ID=" + News_ID;
+function statusshowupdate(sw_dis) {
+    var datas = "sw_dis=" + sw_dis;
     swal({
         title: "change status?",
         text: "",
@@ -203,10 +197,10 @@ function statusupdate(News_ID) {
         if (isConfirm) {
             $.ajax({
                 type: "POST",
-                url: "<?php echo site_url('Control_admin/Status_Property') ?>",
+                url: "<?php echo site_url('Control_admin/Statusshowe') ?>",
                 data: datas,
             }).done(function(data) {
-                $('#Status' + News_ID).html(data);
+                $('#Statusshow' + sw_dis).html(data);
             });
         }
     });
@@ -541,8 +535,6 @@ function statusupdate(News_ID) {
                                     </div>
                                 </div>
                             </div>
-                            <!-- </form> -->
-
                         </div>
                     </div>
                 </div>

@@ -21,7 +21,7 @@
             <p>ง. สังหาริมทรัพย์อื่นๆ ซึ่งกฎหมายได้บัญญัติให้จดทะเบียนจำนองได้เช่น เครื่องจักรขนาดใหญ่เป็นต้น </p>
             <br />
             <form id="insurance" method="GET" action="<?php echo site_url("Home/mortgage") ?>">
-            <input type="hidden" name="IDtype" id="IDtype" value="2">
+                <input type="hidden" name="IDtype" id="IDtype" value="2">
                 <div class="row">
                     <div class="col-md-4 ">
                         <table>
@@ -149,54 +149,62 @@
             <br />
             <div class="row">
                 <?php
-                if(count($properties) == 0){
+                if (count($properties) == 0) {
                     echo "<div style='text-align:center'><h2>coming soon</h2></div>";
-                }else{
-                foreach ($properties as $ipro) { 
-                     
-                    ?>
+                } else {
+                    foreach ($properties as $ipro) {
 
-                    <div class="col-md-3">
-                        <div class="card" >
-                            <!-- <img src="</?php echo base_url('assets/img/slide/' . $ipro->p_image); ?>" class="card-img-top" src="..." alt="Card image cap"> -->
-                            <img src="<?php echo base_url('property/'.$ipro->p_code .'/'. $ipro->p_image); ?>"
-                            class="card-img-top" src="..." alt="Card image cap">
-                            <div class="card-body" style="height: 300px;">
-                                <div class="row">
-                                    <?php if ($ipro->status_match == "available") { ?>
-                                        <span class="badge bg-success">Available</span>
-                                    <?php } else { ?>
-                                        <span class="badge bg-danger">Done</span>
-                                    <?php } ?>
-                                </div>
-                                <hr style="border: 0px;" />
-                                <p style="font-size: 15px; margin-bottom: 0rem;"><i style="color:#049bba" class="bi bi-house"></i> รหัสทรัพย์ : <?php echo $ipro->p_code ?></p>
-                                <hr style="margin: 0.3rem 0;" />
-                                <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-geo-alt" style="color:#049bba"></i> <?php echo $ipro->district.','.$ipro->supdistrict ?></p>
-                                <hr style="margin: 0.3rem 0;" />
-                                <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-plus-square" style="color:#049bba"></i> พื้นที่ <?php echo $ipro->square_wah ?> ตร.วา</p>
-                                <hr style="margin: 0.3rem 0;" />
-                                <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-credit-card" style="color:#049bba"></i> มูลค่าทรัพย์  <?php echo $ipro->p_price ?> บาท</p>
-                                <!-- <hr style="margin: 0.3rem 0;" />
+                ?>
+
+                        <div class="col-md-3">
+                            <div class="card">
+                                <!-- <img src="</?php echo base_url('assets/img/slide/' . $ipro->p_image); ?>" class="card-img-top" src="..." alt="Card image cap"> -->
+                                <!-- <img src="</?php echo base_url('property/' . $ipro->p_code . '/' . $ipro->p_image); ?>" class="card-img-top" src="..." alt="Card image cap"> -->
+                                <?php if ($ipro->status_match == "available") { ?>
+                                    <img src="<?php echo base_url('property/' . $ipro->p_code . '/' . $ipro->p_image); ?>" class="card-img-top" src="..." alt="Card image cap">
+                                <?php } else { ?>
+                                    <div class="wallpaper" style=" background-color: red;background-image:url('<?php echo base_url('property/' . $ipro->p_code . '/' . $ipro->p_image); ?>');
+    background-size:cover; background-position: center;display: grid;align-content:center;justify-content:center;opacity:0.5;     height: 20vh;">
+                                        <h1 style="color:red;">MATCH</h1>
+                                    </div>
+                                <?php } ?>
+                                <div class="card-body" style="height: 300px;">
+                                    <div class="row">
+                                        <?php if ($ipro->status_match == "available") { ?>
+                                            <span class="badge bg-success">Available</span>
+                                        <?php } else { ?>
+                                            <span class="badge bg-danger">Done</span>
+                                        <?php } ?>
+                                    </div>
+                                    <hr style="border: 0px;" />
+                                    <p style="font-size: 15px; margin-bottom: 0rem;"><i style="color:#049bba" class="bi bi-house"></i> รหัสทรัพย์ : <?php echo $ipro->p_code ?></p>
+                                    <hr style="margin: 0.3rem 0;" />
+                                    <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-geo-alt" style="color:#049bba"></i> <?php echo $ipro->district . ',' . $ipro->supdistrict ?></p>
+                                    <hr style="margin: 0.3rem 0;" />
+                                    <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-plus-square" style="color:#049bba"></i> พื้นที่ <?php echo $ipro->square_wah ?> ตร.วา</p>
+                                    <hr style="margin: 0.3rem 0;" />
+                                    <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-credit-card" style="color:#049bba"></i> มูลค่าทรัพย์ <?php echo $ipro->p_price ?> บาท</p>
+                                    <!-- <hr style="margin: 0.3rem 0;" />
                                 <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-credit-card" style="color:#049bba"></i> วงเงินขายฝาก xxx,xxx</p>
                                 <hr style="margin: 0.3rem 0;" />
                                 <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-coin" style="color:#049bba"></i> ดอกเบี้ย 90,000 บาท/ปี(9%) </p>-->
-                                <hr style="margin: 0.3rem 0;" /> 
-                                <a href="<?php echo site_url('Detail_Mortgage/' . $ipro->id . ''); ?>">...ดูรายละเอียด</a>
+                                    <hr style="margin: 0.3rem 0;" />
+                                    <a href="<?php echo site_url('Detail_Mortgage/' . $ipro->id . ''); ?>">...ดูรายละเอียด</a>
+                                </div>
                             </div>
-                        </div>
-                        <!-- </?php echo $n->title; ?>
+                            <!-- </?php echo $n->title; ?>
             </?php echo $n->detail; ?>
             </?php echo $n->image_new; ?> -->
-                        <br />
-                    </div>
-                <?php }} ?>
+                            <br />
+                        </div>
+                <?php }
+                } ?>
             </div>
             <!-- <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4"> -->
-                    <?php echo $pagelinks; ?>
-                <!-- </div>
+            <?php echo $pagelinks; ?>
+            <!-- </div>
                 <div class="col-md-4"></div>
             </div> -->
         </div>
@@ -238,25 +246,26 @@
         allowClear: true
     });
 
-        
+
     function getdistrict(v) {
-         $.getJSON('<?php echo site_url('Home/getdistrict?dis=') ?>' + v, function(res) {
+        $.getJSON('<?php echo site_url('Home/getdistrict?dis=') ?>' + v, function(res) {
 
-             $('#dristrict').find('option').remove();
-             $('#dristrict').append('<option value="">เลือกอำเภอ</option>');
-             for (const i in res) {
-                 $('#dristrict').append('<option value="' + res[i].id + '">' + res[i].name_th + '</option>')
-             }
-         });
-     }
-     function getsubdistrict(v) {
-         $.getJSON('<?php echo site_url('Home/getsubdistrict?subdis=') ?>' + v, function(res) {
+            $('#dristrict').find('option').remove();
+            $('#dristrict').append('<option value="">เลือกอำเภอ</option>');
+            for (const i in res) {
+                $('#dristrict').append('<option value="' + res[i].id + '">' + res[i].name_th + '</option>')
+            }
+        });
+    }
 
-             $('#sub_dristrict').find('option').remove();
-             $('#sub_dristrict').append('<option value="">เลือกตำบล</option>');
-             for (const i in res) {
-                 $('#sub_dristrict').append('<option value="' + res[i].id + '">' + res[i].name_th + '</option>')
-             }
-         });
-     }
+    function getsubdistrict(v) {
+        $.getJSON('<?php echo site_url('Home/getsubdistrict?subdis=') ?>' + v, function(res) {
+
+            $('#sub_dristrict').find('option').remove();
+            $('#sub_dristrict').append('<option value="">เลือกตำบล</option>');
+            for (const i in res) {
+                $('#sub_dristrict').append('<option value="' + res[i].id + '">' + res[i].name_th + '</option>')
+            }
+        });
+    }
 </script>

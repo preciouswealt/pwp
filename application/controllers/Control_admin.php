@@ -1,5 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+date_default_timezone_set("Asia/Bangkok");
+set_time_limit(0);
+ini_set('memory_limit', '-1');
 
 class Control_admin extends CI_Controller
 {
@@ -13,52 +16,50 @@ class Control_admin extends CI_Controller
 		$this->load->model('Admin_model');
 		$this->load->library("pagination");
 	}
-    public function Index()
+	public function Index()
 	{
 		// $data['ShowPage'] = 'homeindex/homeindex';
 		// $this->load->view('backend/Login', $data);
-        $this->load->view('Backend/Login');
+		$this->load->view('Backend/Login');
 	}
 
-    public function Validlogin()
+	public function Validlogin()
 	{
-        $username = $this->input->post('username');
-        $password = $this->input->post('password');
-		if($this->input->server('REQUEST_METHOD') == TRUE){
-            
-            $check_user = $this->Admin_model->record_count($username,$password);
-            if (count($check_user) == 1) {
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		if ($this->input->server('REQUEST_METHOD') == TRUE) {
+
+			$check_user = $this->Admin_model->record_count($username, $password);
+			if (count($check_user) == 1) {
 				$result = $this->Admin_model->fetch_user_login($username, $password);
-                foreach ($result as $value) {
+				foreach ($result as $value) {
 					$id = $value->id;
 					$user_name = $value->user_name;
 					$fristname = $value->fristname;
 					$lastname = $value->lastname;
-				} 
-				$this->session->set_userdata(array('login_id'=> $id,'username' => $user_name,'fristname'=> $fristname,'lastname'=> $lastname));
+				}
+				$this->session->set_userdata(array('login_id' => $id, 'username' => $user_name, 'fristname' => $fristname, 'lastname' => $lastname));
 				redirect('Control_admin/Indexview');
-			}
-			else
-			{
-                // echo count($check_user);
-				$this->session->set_flashdata(array('msgerr'=> '<p class="login-box-msg" style="color:red;">ชื่อผู้ใช้หรือรหัสผ่านผิดพลาด!</p>'));
+			} else {
+				// echo count($check_user);
+				$this->session->set_flashdata(array('msgerr' => '<p class="login-box-msg" style="color:red;">ชื่อผู้ใช้หรือรหัสผ่านผิดพลาด!</p>'));
 				redirect('Control_admin', 'refresh');
 			}
 		}
- 
 	}
-    public function Indexview()
-	{if ($this->session->userdata('username') == '') {
-		$data['username'] = "";
-		$data['password'] = "";
-		$data['result'] = "";
-		$this->load->view('Backend/Login', $data);
-	} else {
-		$data['ShowPage'] = 'Backend/Mainindex/Mainindex';
-        $this->load->view('Backend/Indexview',$data);
+	public function Indexview()
+	{
+		if ($this->session->userdata('username') == '') {
+			$data['username'] = "";
+			$data['password'] = "";
+			$data['result'] = "";
+			$this->load->view('Backend/Login', $data);
+		} else {
+			$data['ShowPage'] = 'Backend/Mainindex/Mainindex';
+			$this->load->view('Backend/Indexview', $data);
+		}
 	}
- 	}
-    
+
 	public function login_admin()
 	{
 		if ($this->session->userdata('username') == '') {
@@ -128,8 +129,8 @@ class Control_admin extends CI_Controller
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		$data['ShowPage'] = 'Backend/Estimate/Estimate';
-		$this->load->view('Backend/Indexview', $data);
+			$data['ShowPage'] = 'Backend/Estimate/Estimate';
+			$this->load->view('Backend/Indexview', $data);
 		}
 	}
 	public function Property_index()
@@ -140,13 +141,13 @@ class Control_admin extends CI_Controller
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-	    $data['province'] = $this->Admin_model->province();
-		$data['tppt'] = $this->Admin_model->selecttypeppt();
-		$data['tpd'] = $this->Admin_model->selecttypepd();
-		
-		$data['Property_index'] = $this->Admin_model->Property_model_index();
-		$data['ShowPage'] = 'Backend/Insertproperty/Property_index';
-		$this->load->view('Backend/Indexview', $data);
+			$data['province'] = $this->Admin_model->province();
+			$data['tppt'] = $this->Admin_model->selecttypeppt();
+			$data['tpd'] = $this->Admin_model->selecttypepd();
+
+			$data['Property_index'] = $this->Admin_model->Property_model_index();
+			$data['ShowPage'] = 'Backend/Insertproperty/Property_index';
+			$this->load->view('Backend/Indexview', $data);
 		}
 	}
 	public function Insertproperty()
@@ -158,125 +159,126 @@ class Control_admin extends CI_Controller
 			$this->load->view('Backend/Login', $data);
 		} else {
 
-        //    $imageproperty =   $this->input->post("imageproperty");
-        //    $imageproperty2  =  $this->input->post("imageproperty2");
-		
-		   $codepoduct  =  $this->input->post("codepoduct");
-		   $codeproperty  =  $this->input->post("codeproperty");
-           $typeproduct  =  $this->input->post("typeproduct");
-           $typeproperty  =  $this->input->post("typeproperty");
-           $titleroperty =    $this->input->post("titleroperty");
-           $detailproperty =   $this->input->post("detailproperty");
-           $address =   $this->input->post("address");
-           $province  =  $this->input->post("province");
-           $dristrict =   $this->input->post("dristrict");
-           $sub_dristrict  =  $this->input->post("sub_dristrict");
-           $postcode =   $this->input->post("postcode");
-           $squarerai  =  $this->input->post("squarerai");
-           $squarengan =   $this->input->post("squarengan");
-           $squarewah  =  $this->input->post("squarewah");
-           $squaremeter =   $this->input->post("squaremeter");
-           $price =   $this->input->post("price");
-           $percen  =  $this->input->post("percen");
-           $typeopen =  $this->input->post("typeopen");
-           $limit_price =   $this->input->post("limit_price");
-		   $start_date =   $this->input->post("start_date");
-		   $end_date =   $this->input->post("end_date");
+			//    $imageproperty =   $this->input->post("imageproperty");
+			//    $imageproperty2  =  $this->input->post("imageproperty2");
 
-		   if (isset($_FILES['imageproperty']) && !empty($_FILES['imageproperty'])) {
-			$no_files = count($_FILES["imageproperty"]['name']);
-			for ($i = 0; $i < $no_files; $i++) {
-				$dateSv = date('ymd');
-				$type = strrchr($_FILES['imageproperty']['name'][$i], ".");
-				$newnamefile = rand(0, 999999);
-				$imageproperty =  $dateSv.$newnamefile . $type;
-				// $imageproperty =  $_FILES['imageproperty']['name'][$i];
-				$_FILES['file']['name'] = $imageproperty;
-				$_FILES['file']['type'] = $_FILES['imageproperty']['type'][$i];
-				$_FILES['file']['tmp_name'] = $_FILES['imageproperty']['tmp_name'][$i];
-				$_FILES['file']['error'] = $_FILES['imageproperty']['error'][$i];
-				$_FILES['file']['size'] = $_FILES['imageproperty']['size'][$i];
-				$config['upload_path']          = './property/'.$codeproperty;
-				$config['allowed_types']         = 'pdf|Pdf|jpg|jpeg|png';
-				$config['remove_spaces'] = 'FALSE';
+			$codepoduct  =  $this->input->post("codepoduct");
+			$codeproperty  =  $this->input->post("codeproperty");
+			$typeproduct  =  $this->input->post("typeproduct");
+			$typeproperty  =  $this->input->post("typeproperty");
+			$titleroperty =    $this->input->post("titleroperty");
+			$detailproperty =   $this->input->post("detailproperty");
+			$address =   $this->input->post("address");
+			$province  =  $this->input->post("province");
+			$dristrict =   $this->input->post("dristrict");
+			$sub_dristrict  =  $this->input->post("sub_dristrict");
+			$postcode =   $this->input->post("postcode");
+			$squarerai  =  $this->input->post("squarerai");
+			$squarengan =   $this->input->post("squarengan");
+			$squarewah  =  $this->input->post("squarewah");
+			$squaremeter =   $this->input->post("squaremeter");
+			$price =   $this->input->post("price");
+			$percen  =  $this->input->post("percen");
+			$typeopen =  $this->input->post("typeopen");
+			$limit_price =   $this->input->post("limit_price");
+			$start_date =   $this->input->post("start_date");
+			$end_date =   $this->input->post("end_date");
 
-				$this->load->library('upload', $config);
-				$this->upload->initialize($config);
-				if(!is_dir('./property/'.$codeproperty)) {
-					mkdir('./property/'.$codeproperty, 0777, true);
-				}
+			if (isset($_FILES['imageproperty']) && !empty($_FILES['imageproperty'])) {
+				$no_files = count($_FILES["imageproperty"]['name']);
+				for ($i = 0; $i < $no_files; $i++) {
+					$dateSv = date('ymd');
+					$type = strrchr($_FILES['imageproperty']['name'][$i], ".");
+					$newnamefile = rand(0, 999999);
+					$imageproperty =  $dateSv . $newnamefile . $type;
+					// $imageproperty =  $_FILES['imageproperty']['name'][$i];
+					$_FILES['file']['name'] = $imageproperty;
+					$_FILES['file']['type'] = $_FILES['imageproperty']['type'][$i];
+					$_FILES['file']['tmp_name'] = $_FILES['imageproperty']['tmp_name'][$i];
+					$_FILES['file']['error'] = $_FILES['imageproperty']['error'][$i];
+					$_FILES['file']['size'] = $_FILES['imageproperty']['size'][$i];
+					$config['upload_path']          = './property/' . $codeproperty;
+					$config['allowed_types']         = 'pdf|Pdf|jpg|jpeg|png';
+					$config['remove_spaces'] = 'FALSE';
 
-				if ($this->upload->do_upload('file')) {
-					$this->Admin_model->insertumgheader($codepoduct,$codeproperty,$imageproperty);
-					$this->Admin_model->Update_image($codepoduct,$codeproperty,$imageproperty);
-					$uploadData = $this->upload->data();
-				}
-			}
-		}
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+					if (!is_dir('./property/' . $codeproperty)) {
+						mkdir('./property/' . $codeproperty, 0777, true);
+					}
 
-		if (isset($_FILES['imageproperty2']) && !empty($_FILES['imageproperty2'])) {
-			$no_filesLg = count($_FILES["imageproperty2"]['name']);
-			for ($i = 0; $i < $no_filesLg; $i++) {
-				$dateSv = date('ymd');
-				$type = strrchr($_FILES['imageproperty2']['name'][$i], ".");
-				$newnamefile = rand(0, 999999);
-				$imageproperty2 =  $dateSv.$newnamefile . $type;
-				// $imageproperty2 =  $_FILES['imageproperty2']['name'][$i];
-				$_FILES['file']['name'] = $imageproperty2;
-				$_FILES['file']['type'] = $_FILES['imageproperty2']['type'][$i];
-				$_FILES['file']['tmp_name'] = $_FILES['imageproperty2']['tmp_name'][$i];
-				$_FILES['file']['error'] = $_FILES['imageproperty2']['error'][$i];
-				$_FILES['file']['size'] = $_FILES['imageproperty2']['size'][$i];
-				$config['upload_path']          = './property/'.$codeproperty;
-				$config['allowed_types']         = 'pdf|Pdf|jpg|jpeg|png';
-				$config['remove_spaces'] = 'FALSE';
-			
-				$this->load->library('upload', $config);
-				$this->upload->initialize($config);
-	
-				if(!is_dir('./property/'.$codeproperty)) {
-					mkdir('./property/'.$codeproperty, 0777, true);
-				}
-				if ($this->upload->do_upload('file')) {
-					$this->Admin_model->inserimgdetail($codepoduct,$codeproperty,$imageproperty2);
-					$uploadData = $this->upload->data();
-				
+					if ($this->upload->do_upload('file')) {
+						$this->Admin_model->insertumgheader($codepoduct, $codeproperty, $imageproperty);
+						$this->Admin_model->Update_image($codepoduct, $codeproperty, $imageproperty);
+						$uploadData = $this->upload->data();
+					}
 				}
 			}
-		}
 
-		// $insert = true;
-		$insert = $this->Admin_model->Insert_property($codepoduct,
-	$codeproperty,
-	$typeproduct,
-	$typeproperty,
-	$titleroperty ,
-	$detailproperty,
-	$address,
-	$province ,
-	$dristrict,
-	$sub_dristrict  ,
-	$postcode ,
-	$squarerai,
-	$squarengan ,
-	$squarewah ,
-	$squaremeter,
-	$price ,
-	$percen,
-	$typeopen,
-	$limit_price,
-	$start_date,
-	$end_date);
+			if (isset($_FILES['imageproperty2']) && !empty($_FILES['imageproperty2'])) {
+				$no_filesLg = count($_FILES["imageproperty2"]['name']);
+				for ($i = 0; $i < $no_filesLg; $i++) {
+					$dateSv = date('ymd');
+					$type = strrchr($_FILES['imageproperty2']['name'][$i], ".");
+					$newnamefile = rand(0, 999999);
+					$imageproperty2 =  $dateSv . $newnamefile . $type;
+					// $imageproperty2 =  $_FILES['imageproperty2']['name'][$i];
+					$_FILES['file']['name'] = $imageproperty2;
+					$_FILES['file']['type'] = $_FILES['imageproperty2']['type'][$i];
+					$_FILES['file']['tmp_name'] = $_FILES['imageproperty2']['tmp_name'][$i];
+					$_FILES['file']['error'] = $_FILES['imageproperty2']['error'][$i];
+					$_FILES['file']['size'] = $_FILES['imageproperty2']['size'][$i];
+					$config['upload_path']          = './property/' . $codeproperty;
+					$config['allowed_types']         = 'pdf|Pdf|jpg|jpeg|png';
+					$config['remove_spaces'] = 'FALSE';
 
-		if ($insert) {
-			$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2');
-		} else {
-			$data = array('success' => false, 'msg' => 'Form has been not submitted');
-		}
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
 
-		echo json_encode($data);	
-		// $data['ShowPage'] = 'Backend/Insertproperty/Forminsertproperty';
-		// $this->load->view('Backend/Indexview', $data);
+					if (!is_dir('./property/' . $codeproperty)) {
+						mkdir('./property/' . $codeproperty, 0777, true);
+					}
+					if ($this->upload->do_upload('file')) {
+						$this->Admin_model->inserimgdetail($codepoduct, $codeproperty, $imageproperty2);
+						$uploadData = $this->upload->data();
+					}
+				}
+			}
+
+			// $insert = true;
+			$insert = $this->Admin_model->Insert_property(
+				$codepoduct,
+				$codeproperty,
+				$typeproduct,
+				$typeproperty,
+				$titleroperty,
+				$detailproperty,
+				$address,
+				$province,
+				$dristrict,
+				$sub_dristrict,
+				$postcode,
+				$squarerai,
+				$squarengan,
+				$squarewah,
+				$squaremeter,
+				$price,
+				$percen,
+				$typeopen,
+				$limit_price,
+				$start_date,
+				$end_date
+			);
+
+			if ($insert) {
+				$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2');
+			} else {
+				$data = array('success' => false, 'msg' => 'Form has been not submitted');
+			}
+
+			echo json_encode($data);
+			// $data['ShowPage'] = 'Backend/Insertproperty/Forminsertproperty';
+			// $this->load->view('Backend/Indexview', $data);
 		}
 	}
 	public function News_admin()
@@ -287,96 +289,100 @@ class Control_admin extends CI_Controller
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		$data['newsall'] = $this->Admin_model->News_model();
-		$data['ShowPage'] = 'Backend/News/Newsindex';
-		$this->load->view('Backend/Indexview', $data);
+			$data['newsall'] = $this->Admin_model->News_model();
+			$data['ShowPage'] = 'Backend/News/Newsindex';
+			$this->load->view('Backend/Indexview', $data);
 		}
 	}
-	public function News_detail(){
+	public function News_detail()
+	{
 		if ($this->session->userdata('username') == '') {
 			$data['username'] = "";
 			$data['password'] = "";
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		$idnews = $this->input->post('id');
-		$data['newdetail'] = $this->Admin_model->News_model_detail($idnews);
-	
-		$this->load->view('Backend/News/Detailnew', $data);
+			$idnews = $this->input->post('id');
+			$data['newdetail'] = $this->Admin_model->News_model_detail($idnews);
+
+			$this->load->view('Backend/News/Detailnew', $data);
 		}
 	}
-	public function News_edit(){
+	public function News_edit()
+	{
 		if ($this->session->userdata('username') == '') {
 			$data['username'] = "";
 			$data['password'] = "";
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		    $idnews = $this->input->post('idnews');
+			$idnews = $this->input->post('idnews');
 			// $imagenews = $this->input->post('avatar');
 			$Title = $this->input->post('Title', TRUE);
 			$Detail = $this->input->post('Detail', TRUE);
 			$imagenewsdelete = $this->input->POST('imagenewsdelete');
 			$Update_By = $this->session->userdata('username');
-			
+
 			if (isset($_FILES['imagenews']) && !empty($_FILES['imagenews'])) {
-			
-					$dateSv = date('ymd');
-					$type = strrchr($_FILES['imagenews']['name'], ".");
-					$newnamefile = rand(0, 999999);
-					$imagenews =  $dateSv.$newnamefile . $type;
-					$_FILES['file']['name'] = $imagenews;
-					$_FILES['file']['type'] = $_FILES['imagenews']['type'];
-					$_FILES['file']['tmp_name'] = $_FILES['imagenews']['tmp_name'];
-					$_FILES['file']['error'] = $_FILES['imagenews']['error'];
-					$_FILES['file']['size'] = $_FILES['imagenews']['size'];
-					$config['upload_path']          = './assets/img/news';
-					$config['allowed_types']        = '*';
-					$config['remove_spaces'] = 'FALSE';
-					
-					$this->load->library('upload', $config);
-					$this->upload->initialize($config);
-					if ($this->upload->do_upload('file')) {
-						$delete_img = "./assets/img/news/" . $imagenewsdelete;
-						@unlink($delete_img);
-						// $this->Homemodel->inserttouchimagedeed($filedeed,$idcode);
-						$insert = $this->Admin_model->Update_newdetail($idnews, $Title, $Detail, $imagenews,$Update_By);
-						if ($insert) {
-							$data = array('success' => true, 'msg1' => 'Form has been submitted successfully1');
-						} else {
-							$data = array('success' => false, 'msg' => 'Form has been not submitted');
-						}
-						echo json_encode($data);
-						// $uploadData = $this->upload->data();
-					}else{
-						$insert = $this->Admin_model->Update_newdetail($idnews, $Title, $Detail, $imagenewsdelete,$Update_By);
-						// $insert = true;
-						if ($insert) {
-							$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2' 
-							,'msg2' => $idnews,'msg3' => $Title,'msg4' => $Detail,'msg5' => $imagenewsdelete,'msg6' => $Update_By);
-						} else {
-							$data = array('success' => false, 'msg' => 'Form has been not submitted'
-							,'msg2' => $idnews,'msg3' => $Title,'msg4' => $Detail,'msg5' => $imagenewsdelete,'msg6' => $Update_By);
-						}
-			
-						echo json_encode($data);
+
+				$dateSv = date('ymd');
+				$type = strrchr($_FILES['imagenews']['name'], ".");
+				$newnamefile = rand(0, 999999);
+				$imagenews =  $dateSv . $newnamefile . $type;
+				$_FILES['file']['name'] = $imagenews;
+				$_FILES['file']['type'] = $_FILES['imagenews']['type'];
+				$_FILES['file']['tmp_name'] = $_FILES['imagenews']['tmp_name'];
+				$_FILES['file']['error'] = $_FILES['imagenews']['error'];
+				$_FILES['file']['size'] = $_FILES['imagenews']['size'];
+				$config['upload_path']          = './assets/img/news';
+				$config['allowed_types']        = '*';
+				$config['remove_spaces'] = 'FALSE';
+
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				if ($this->upload->do_upload('file')) {
+					$delete_img = "./assets/img/news/" . $imagenewsdelete;
+					@unlink($delete_img);
+					// $this->Homemodel->inserttouchimagedeed($filedeed,$idcode);
+					$insert = $this->Admin_model->Update_newdetail($idnews, $Title, $Detail, $imagenews, $Update_By);
+					if ($insert) {
+						$data = array('success' => true, 'msg1' => 'Form has been submitted successfully1');
+					} else {
+						$data = array('success' => false, 'msg' => 'Form has been not submitted');
 					}
-		
-			}else{
-				$insert = $this->Admin_model->Update_newdetail($idnews, $Title, $Detail, $imagenewsdelete,$Update_By);
+					echo json_encode($data);
+					// $uploadData = $this->upload->data();
+				} else {
+					$insert = $this->Admin_model->Update_newdetail($idnews, $Title, $Detail, $imagenewsdelete, $Update_By);
+					// $insert = true;
+					if ($insert) {
+						$data = array(
+							'success' => true, 'msg1' => 'Form has been submitted successfully2', 'msg2' => $idnews, 'msg3' => $Title, 'msg4' => $Detail, 'msg5' => $imagenewsdelete, 'msg6' => $Update_By
+						);
+					} else {
+						$data = array(
+							'success' => false, 'msg' => 'Form has been not submitted', 'msg2' => $idnews, 'msg3' => $Title, 'msg4' => $Detail, 'msg5' => $imagenewsdelete, 'msg6' => $Update_By
+						);
+					}
+
+					echo json_encode($data);
+				}
+			} else {
+				$insert = $this->Admin_model->Update_newdetail($idnews, $Title, $Detail, $imagenewsdelete, $Update_By);
 				// $insert = true;
 				if ($insert) {
-					$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2' 
-					,'msg2' => $idnews,'msg3' => $Title,'msg4' => $Detail,'msg5' => $imagenewsdelete,'msg6' => $Update_By);
+					$data = array(
+						'success' => true, 'msg1' => 'Form has been submitted successfully2', 'msg2' => $idnews, 'msg3' => $Title, 'msg4' => $Detail, 'msg5' => $imagenewsdelete, 'msg6' => $Update_By
+					);
 				} else {
-					$data = array('success' => false, 'msg' => 'Form has been not submitted'
-					,'msg2' => $idnews,'msg3' => $Title,'msg4' => $Detail,'msg5' => $imagenewsdelete,'msg6' => $Update_By);
+					$data = array(
+						'success' => false, 'msg' => 'Form has been not submitted', 'msg2' => $idnews, 'msg3' => $Title, 'msg4' => $Detail, 'msg5' => $imagenewsdelete, 'msg6' => $Update_By
+					);
 				}
-	
+
 				echo json_encode($data);
 			}
 		}
-
 	}
 	public function Insert_News()
 	{
@@ -386,16 +392,16 @@ class Control_admin extends CI_Controller
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		$Title = $this->input->post('Titleinsert', TRUE);
-		$Detail = $this->input->post('Detailinsert', TRUE);
-		$Update_By = $this->session->userdata('username');
-		
-		if (isset($_FILES['imagenews']) && !empty($_FILES['imagenews'])) {
-		
+			$Title = $this->input->post('Titleinsert', TRUE);
+			$Detail = $this->input->post('Detailinsert', TRUE);
+			$Update_By = $this->session->userdata('username');
+
+			if (isset($_FILES['imagenews']) && !empty($_FILES['imagenews'])) {
+
 				$dateSv = date('ymd');
 				$type = strrchr($_FILES['imagenews']['name'], ".");
 				$newnamefile = rand(0, 999999);
-				$imagenews =  $dateSv.$newnamefile . $type;
+				$imagenews =  $dateSv . $newnamefile . $type;
 				$_FILES['file']['name'] = $imagenews;
 				$_FILES['file']['type'] = $_FILES['imagenews']['type'];
 				$_FILES['file']['tmp_name'] = $_FILES['imagenews']['tmp_name'];
@@ -404,11 +410,11 @@ class Control_admin extends CI_Controller
 				$config['upload_path']          = './assets/img/news';
 				$config['allowed_types']        = '*';
 				$config['remove_spaces'] = 'FALSE';
-				
+
 				$this->load->library('upload', $config);
 				$this->upload->initialize($config);
 				if ($this->upload->do_upload('file')) {
-					$insert = $this->Admin_model->Insert_news($Title, $Detail, $imagenews,$Update_By);
+					$insert = $this->Admin_model->Insert_news($Title, $Detail, $imagenews, $Update_By);
 					if ($insert) {
 						$data = array('success' => true, 'msg1' => 'Form has been submitted successfully1');
 					} else {
@@ -416,8 +422,8 @@ class Control_admin extends CI_Controller
 					}
 					echo json_encode($data);
 					// $uploadData = $this->upload->data();
-				}else{
-					$insert = $this->Admin_model->Insert_news($Title, $Detail, $imagenews,$Update_By);
+				} else {
+					$insert = $this->Admin_model->Insert_news($Title, $Detail, $imagenews, $Update_By);
 					// $insert = true;
 					if ($insert) {
 						$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2');
@@ -426,22 +432,21 @@ class Control_admin extends CI_Controller
 					}
 					echo json_encode($data);
 				}
-	
-		}else{
-			$imagenews = NULL;
-			$insert = $this->Admin_model->Insert_news($Title, $Detail, $imagenews,$Update_By);
-			// $insert = true;
-			if ($insert) {
-				$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2' );
 			} else {
-				$data = array('success' => false, 'msg' => 'Form has been not submitted');
-			}
+				$imagenews = NULL;
+				$insert = $this->Admin_model->Insert_news($Title, $Detail, $imagenews, $Update_By);
+				// $insert = true;
+				if ($insert) {
+					$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2');
+				} else {
+					$data = array('success' => false, 'msg' => 'Form has been not submitted');
+				}
 
-			echo json_encode($data);
+				echo json_encode($data);
+			}
 		}
 	}
-	}
-	
+
 	public function Status_News()
 	{
 		if ($this->session->userdata('username') == '') {
@@ -450,26 +455,25 @@ class Control_admin extends CI_Controller
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		$News_ID = $this->input->POST('News_ID');
-		$get_News= $this->Admin_model->Get_idnews($News_ID);
-		if ($get_News[0]->status_new == '1') {
-			$status_updatenew = 0;
-			$this->Admin_model->update_statusnews($status_updatenew, $News_ID);
-			echo "<button type='button' class='btn btn-danger btn-xs'
+			$News_ID = $this->input->POST('News_ID');
+			$get_News = $this->Admin_model->Get_idnews($News_ID);
+			if ($get_News[0]->status_new == '1') {
+				$status_updatenew = 0;
+				$this->Admin_model->update_statusnews($status_updatenew, $News_ID);
+				echo "<button type='button' class='btn btn-danger btn-xs'
 			style='color:white;font-size: 13px;border-radius: 5px;' onclick='statusupdate(" . $News_ID . ")'>
 			ปิดการใช้งาน
 			</button>";
-
-		} else if ($get_News[0]->status_new == '0') {
-			$status_updatenew = 1;
-			$this->Admin_model->update_statusnews($status_updatenew, $News_ID);
-			echo "<button type='button' class='btn btn-success btn-xs'
+			} else if ($get_News[0]->status_new == '0') {
+				$status_updatenew = 1;
+				$this->Admin_model->update_statusnews($status_updatenew, $News_ID);
+				echo "<button type='button' class='btn btn-success btn-xs'
 			style='color:white;font-size: 13px;border-radius: 5px;'
 			onclick='statusupdate(" . $News_ID . ")'>
 			เปิดการใช้งาน
 			</button>";
+			}
 		}
-	}
 	}
 	public function delete_News()
 	{
@@ -479,7 +483,7 @@ class Control_admin extends CI_Controller
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		$News_ID = $this->input->POST('News_ID');
+			$News_ID = $this->input->POST('News_ID');
 			$get_News = $this->Admin_model->Get_idnews($News_ID);
 			if ($get_News[0]->status_new == 0) {
 				echo "ลบข้อมูลสำเร็จ";
@@ -492,7 +496,7 @@ class Control_admin extends CI_Controller
 			}
 		}
 	}
-	
+
 	public function Even_admin()
 	{
 		if ($this->session->userdata('username') == '') {
@@ -502,85 +506,87 @@ class Control_admin extends CI_Controller
 			$this->load->view('Backend/Login', $data);
 		} else {
 
-		$data['Evenall'] = $this->Admin_model->Even_model();
-		$data['ShowPage'] = 'Backend/Even/Evenindex';
-		$this->load->view('Backend/Indexview', $data);
+			$data['Evenall'] = $this->Admin_model->Even_model();
+			$data['ShowPage'] = 'Backend/Even/Evenindex';
+			$this->load->view('Backend/Indexview', $data);
 		}
 	}
 
-	public function Even_detail(){
+	public function Even_detail()
+	{
 		if ($this->session->userdata('username') == '') {
 			$data['username'] = "";
 			$data['password'] = "";
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		$idevens = $this->input->post('id');
-		$data['evendetail'] = $this->Admin_model->Even_model_detail($idevens);
-	
-		$this->load->view('Backend/Even/Detaileven', $data);
+			$idevens = $this->input->post('id');
+			$data['evendetail'] = $this->Admin_model->Even_model_detail($idevens);
+
+			$this->load->view('Backend/Even/Detaileven', $data);
 		}
-		}
-	public function Even_edit(){
+	}
+	public function Even_edit()
+	{
 		if ($this->session->userdata('username') == '') {
 			$data['username'] = "";
 			$data['password'] = "";
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		    $ideven = $this->input->post('ideven');
+			$ideven = $this->input->post('ideven');
 			// $imagenews = $this->input->post('avatar');
 			$Title = $this->input->post('Title', TRUE);
 			$Detail = $this->input->post('Detail', TRUE);
 			$imageevendelete = $this->input->POST('imageevendelete');
 			$Update_By = $this->session->userdata('username');
-			
+
 			if (isset($_FILES['imageeven']) && !empty($_FILES['imageeven'])) {
-			
-					$dateSv = date('ymd');
-					$type = strrchr($_FILES['imageeven']['name'], ".");
-					$newnamefile = rand(0, 999999);
-					$imageeven =  $dateSv.$newnamefile . $type;
-					$_FILES['file']['name'] = $imageeven;
-					$_FILES['file']['type'] = $_FILES['imageeven']['type'];
-					$_FILES['file']['tmp_name'] = $_FILES['imageeven']['tmp_name'];
-					$_FILES['file']['error'] = $_FILES['imageeven']['error'];
-					$_FILES['file']['size'] = $_FILES['imageeven']['size'];
-					$config['upload_path']          = './assets/img/even';
-					$config['allowed_types']        = '*';
-					$config['remove_spaces'] = 'FALSE';
-					
-					$this->load->library('upload', $config);
-					$this->upload->initialize($config);
-					if ($this->upload->do_upload('file')) {
-						$delete_img = "./assets/img/even/" . $imageevendelete;
-						@unlink($delete_img);
-						$insert = $this->Admin_model->Update_newdetail($ideven, $Title, $Detail, $imageeven,$Update_By);
-						if ($insert) {
-							$data = array('success' => true, 'msg1' => 'Form has been submitted successfully1');
-						} else {
-							$data = array('success' => false, 'msg' => 'Form has been not submitted');
-						}
-						echo json_encode($data);
-					}else{
-						$insert = $this->Admin_model->Update_newdetail($ideven, $Title, $Detail, $imageevendelete,$Update_By);
-						// $insert = true;
-						if ($insert) {
-							$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2' );
-						} else {
-							$data = array('success' => false, 'msg' => 'Form has been not submitted');
-						}
-						echo json_encode($data);
+
+				$dateSv = date('ymd');
+				$type = strrchr($_FILES['imageeven']['name'], ".");
+				$newnamefile = rand(0, 999999);
+				$imageeven =  $dateSv . $newnamefile . $type;
+				$_FILES['file']['name'] = $imageeven;
+				$_FILES['file']['type'] = $_FILES['imageeven']['type'];
+				$_FILES['file']['tmp_name'] = $_FILES['imageeven']['tmp_name'];
+				$_FILES['file']['error'] = $_FILES['imageeven']['error'];
+				$_FILES['file']['size'] = $_FILES['imageeven']['size'];
+				$config['upload_path']          = './assets/img/even';
+				$config['allowed_types']        = '*';
+				$config['remove_spaces'] = 'FALSE';
+
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				if ($this->upload->do_upload('file')) {
+					$delete_img = "./assets/img/even/" . $imageevendelete;
+					@unlink($delete_img);
+					$insert = $this->Admin_model->Update_newdetail($ideven, $Title, $Detail, $imageeven, $Update_By);
+					if ($insert) {
+						$data = array('success' => true, 'msg1' => 'Form has been submitted successfully1');
+					} else {
+						$data = array('success' => false, 'msg' => 'Form has been not submitted');
 					}
-			}else{
-				$insert = $this->Admin_model->Update_newdetail($ideven, $Title, $Detail, $imageevendelete,$Update_By);
+					echo json_encode($data);
+				} else {
+					$insert = $this->Admin_model->Update_newdetail($ideven, $Title, $Detail, $imageevendelete, $Update_By);
+					// $insert = true;
+					if ($insert) {
+						$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2');
+					} else {
+						$data = array('success' => false, 'msg' => 'Form has been not submitted');
+					}
+					echo json_encode($data);
+				}
+			} else {
+				$insert = $this->Admin_model->Update_newdetail($ideven, $Title, $Detail, $imageevendelete, $Update_By);
 				// $insert = true;
 				if ($insert) {
 					$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2');
 				} else {
 					$data = array('success' => false, 'msg' => 'Form has been not submitted');
 				}
-	
+
 				echo json_encode($data);
 			}
 		}
@@ -593,16 +599,16 @@ class Control_admin extends CI_Controller
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		$Title = $this->input->post('Titleinsert', TRUE);
-		$Detail = $this->input->post('Detailinsert', TRUE);
-		$Update_By = $this->session->userdata('username');
-		
-		if (isset($_FILES['imageeven']) && !empty($_FILES['imageeven'])) {
-		
+			$Title = $this->input->post('Titleinsert', TRUE);
+			$Detail = $this->input->post('Detailinsert', TRUE);
+			$Update_By = $this->session->userdata('username');
+
+			if (isset($_FILES['imageeven']) && !empty($_FILES['imageeven'])) {
+
 				$dateSv = date('ymd');
 				$type = strrchr($_FILES['imageeven']['name'], ".");
 				$newnamefile = rand(0, 999999);
-				$imageeven =  $dateSv.$newnamefile . $type;
+				$imageeven =  $dateSv . $newnamefile . $type;
 				$_FILES['file']['name'] = $imageeven;
 				$_FILES['file']['type'] = $_FILES['imageeven']['type'];
 				$_FILES['file']['tmp_name'] = $_FILES['imageeven']['tmp_name'];
@@ -611,44 +617,43 @@ class Control_admin extends CI_Controller
 				$config['upload_path']          = './assets/img/even';
 				$config['allowed_types']        = '*';
 				$config['remove_spaces'] = 'FALSE';
-				
+
 				$this->load->library('upload', $config);
 				$this->upload->initialize($config);
 				if ($this->upload->do_upload('file')) {
-					$insert = $this->Admin_model->Insert_even($Title, $Detail, $imageeven,$Update_By);
+					$insert = $this->Admin_model->Insert_even($Title, $Detail, $imageeven, $Update_By);
 					if ($insert) {
 						$data = array('success' => true, 'msg1' => 'Form has been submitted successfully1');
 					} else {
 						$data = array('success' => false, 'msg' => 'Form has been not submitted');
 					}
 					echo json_encode($data);
-				}else{
-					$insert = $this->Admin_model->Insert_even($idnews, $Title, $Detail, $imageeven,$Update_By);
+				} else {
+					$insert = $this->Admin_model->Insert_even($Title, $Detail, $imageeven, $Update_By);
 					// $insert = true;
 					if ($insert) {
 						$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2');
 					} else {
 						$data = array('success' => false, 'msg' => 'Form has been not submitted');
 					}
-		
+
 					echo json_encode($data);
 				}
-	
-		}else{
-			$imageeven = NULL;
-			$insert = $this->Admin_model->Insert_even($Title, $Detail, $imageeven,$Update_By);
-			// $insert = true;
-			if ($insert) {
-				$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2' );
 			} else {
-				$data = array('success' => false, 'msg' => 'Form has been not submitted');
-			}
+				$imageeven = NULL;
+				$insert = $this->Admin_model->Insert_even($Title, $Detail, $imageeven, $Update_By);
+				// $insert = true;
+				if ($insert) {
+					$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2');
+				} else {
+					$data = array('success' => false, 'msg' => 'Form has been not submitted');
+				}
 
-			echo json_encode($data);
+				echo json_encode($data);
+			}
 		}
 	}
-	}
-	
+
 	public function Status_Even()
 	{
 		if ($this->session->userdata('username') == '') {
@@ -657,26 +662,25 @@ class Control_admin extends CI_Controller
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		$Even_ID = $this->input->POST('Even_ID');
-		$get_Even= $this->Admin_model->Get_ideven($Even_ID);
-		if ($get_Even[0]->status_even == '1') {
-			$status_updateeven = 0;
-			$this->Admin_model->update_statuseven($status_updateeven, $Even_ID);
-			echo "<button type='button' class='btn btn-danger btn-xs'
+			$Even_ID = $this->input->POST('Even_ID');
+			$get_Even = $this->Admin_model->Get_ideven($Even_ID);
+			if ($get_Even[0]->status_even == '1') {
+				$status_updateeven = 0;
+				$this->Admin_model->update_statuseven($status_updateeven, $Even_ID);
+				echo "<button type='button' class='btn btn-danger btn-xs'
 			style='color:white;font-size: 13px;border-radius: 5px;' onclick='statusupdate(" . $Even_ID . ")'>
 			ปิดการใช้งาน
 			</button>";
-
-		} else if ($get_Even[0]->status_even == '0') {
-			$status_updateeven = 1;
-			$this->Admin_model->update_statuseven($status_updateeven, $Even_ID);
-			echo "<button type='button' class='btn btn-success btn-xs'
+			} else if ($get_Even[0]->status_even == '0') {
+				$status_updateeven = 1;
+				$this->Admin_model->update_statuseven($status_updateeven, $Even_ID);
+				echo "<button type='button' class='btn btn-success btn-xs'
 			style='color:white;font-size: 13px;border-radius: 5px;'
 			onclick='statusupdate(" . $Even_ID . ")'>
 			เปิดการใช้งาน
 			</button>";
+			}
 		}
-	}
 	}
 	public function delete_Even()
 	{
@@ -686,7 +690,7 @@ class Control_admin extends CI_Controller
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		$Even_ID = $this->input->POST('Even_ID');
+			$Even_ID = $this->input->POST('Even_ID');
 			$get_Even = $this->Admin_model->Get_ideven($Even_ID);
 			if ($get_Even[0]->status_even == 0) {
 				echo "ลบข้อมูลสำเร็จ";
@@ -708,62 +712,65 @@ class Control_admin extends CI_Controller
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		$data['Touchtomoney'] = $this->Admin_model->Touchtomoney();
-		$data['ShowPage'] = 'Backend/Touchtomoney/Touchtomoney';
-		$this->load->view('Backend/Indexview', $data);
-		// $this->load->view('backend/tables');
+			$data['Touchtomoney'] = $this->Admin_model->Touchtomoney();
+			$data['ShowPage'] = 'Backend/Touchtomoney/Touchtomoney';
+			$this->load->view('Backend/Indexview', $data);
+			// $this->load->view('backend/tables');
 		}
 	}
-	public function Appraisal($idtouch){
+	public function Appraisal($idtouch)
+	{
 		if ($this->session->userdata('username') == '') {
 			$data['username'] = "";
 			$data['password'] = "";
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		// $idtouch = $this->input->post('id');
-		$data['touchdetail'] = $this->Admin_model->Touchtomoney_model($idtouch);
-	    foreach($data['touchdetail'] as $idcode){
-          $idcode     =   $idcode->id_code;
-	    }
-		$idproperty = 1;
-		$iddeed = 2;
-	     $data['imagedeed'] = $this->Admin_model->Imagedeed_model($idcode,$iddeed);
-	     $data['imageproperty'] = $this->Admin_model->Imageproperty_model($idcode,$idproperty);
-		//  $this->load->view('Backend/Touchtomoney/Touchtomoneydetail', $data);
-		 $data['ShowPage'] = 'Backend/Touchtomoney/Touchtomoneydetail';
-		 $this->load->view('Backend/Indexview', $data);
+			// $idtouch = $this->input->post('id');
+			$data['touchdetail'] = $this->Admin_model->Touchtomoney_model($idtouch);
+			foreach ($data['touchdetail'] as $idcode) {
+				$idcode     =   $idcode->id_code;
+			}
+			$idproperty = 1;
+			$iddeed = 2;
+			$data['imagedeed'] = $this->Admin_model->Imagedeed_model($idcode, $iddeed);
+			$data['imageproperty'] = $this->Admin_model->Imageproperty_model($idcode, $idproperty);
+			//  $this->load->view('Backend/Touchtomoney/Touchtomoneydetail', $data);
+			$data['ShowPage'] = 'Backend/Touchtomoney/Touchtomoneydetail';
+			$this->load->view('Backend/Indexview', $data);
 		}
 	}
-	public function Touchtomoney_detail(){
+	public function Touchtomoney_detail()
+	{
 		if ($this->session->userdata('username') == '') {
 			$data['username'] = "";
 			$data['password'] = "";
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		$idtouch = $this->input->post('id');
-		$data['touchdetail'] = $this->Admin_model->Touchtomoney_model($idtouch);
-	    foreach($data['touchdetail'] as $idcode){
-          $idcode     =   $idcode->id_code;
-	    }
-		$idproperty = 1;
-		$iddeed = 2;
-	     $data['imagedeed'] = $this->Admin_model->Imagedeed_model($idcode,$iddeed);
-	     $data['imageproperty'] = $this->Admin_model->Imageproperty_model($idcode,$idproperty);
-		 $this->load->view('Backend/Touchtomoney/Touchtomoneydetail', $data);
+			$idtouch = $this->input->post('id');
+			$data['touchdetail'] = $this->Admin_model->Touchtomoney_model($idtouch);
+			foreach ($data['touchdetail'] as $idcode) {
+				$idcode     =   $idcode->id_code;
+			}
+			$idproperty = 1;
+			$iddeed = 2;
+			$data['imagedeed'] = $this->Admin_model->Imagedeed_model($idcode, $iddeed);
+			$data['imageproperty'] = $this->Admin_model->Imageproperty_model($idcode, $idproperty);
+			$this->load->view('Backend/Touchtomoney/Touchtomoneydetail', $data);
 		}
 	}
-	public function Contact_admin(){
+	public function Contact_admin()
+	{
 		if ($this->session->userdata('username') == '') {
 			$data['username'] = "";
 			$data['password'] = "";
 			$data['result'] = "";
 			$this->load->view('Backend/Login', $data);
 		} else {
-		$data['Contact'] = $this->Admin_model->Contact_model();
-		$data['ShowPage'] = 'Backend/Contact/Contact';
-		$this->load->view('Backend/Indexview', $data);
+			$data['Contact'] = $this->Admin_model->Contact_model();
+			$data['ShowPage'] = 'Backend/Contact/Contact';
+			$this->load->view('Backend/Indexview', $data);
 		}
 	}
 
@@ -796,7 +803,7 @@ class Control_admin extends CI_Controller
 				'id' => 	$r->id,
 				'district_id' => 	$r->district_id,
 				'zipcode' => 	$r->zipcode
-				
+
 			);
 		}
 		echo json_encode($result);
@@ -805,53 +812,239 @@ class Control_admin extends CI_Controller
 	{
 		$postcode = trim($this->input->get('postcode'));
 		$this->session->set_userdata("postcode", $postcode);
-		$res = $this->Admin_model->subdistrictpost($postcode );
+		$res = $this->Admin_model->subdistrictpost($postcode);
 		// $this->session->set_userdata("carYear2", $year);
 		// $res = $this->Admin_model->subposcode($postcode);
 		$result = array();
 		foreach ($res as $r) {
 			$result[] = array(
 				'zipcode' => $r->zipcode
-				
+
 			);
 		}
 		echo json_encode($result);
 	}
 
-	public function Statusmatch (){
-		$SM_id = $this->input->POST('SM_id');
-		$Get_match = $this->Admin_model->selectstatusmatch($SM_id);
-		if ($Get_match[0]->status_match == 'available') {
-			$Status = 'done';
-			$this->Admin_model->Update_statusmatch($Status, $SM_id);
-			echo "<button type='button' class='btn btn-danger btn-xs' style='color:white;font-size: 13px;border-radius: 5px;' onclick='statusmatchupdate(" . $SM_id . ")'>
+	public function Statusmatch()
+	{
+		if ($this->session->userdata('username') == '') {
+			$data['username'] = "";
+			$data['password'] = "";
+			$data['result'] = "";
+			$this->load->view('Backend/Login', $data);
+		} else {
+			$SM_id = $this->input->POST('SM_id');
+			$Get_match = $this->Admin_model->selectstatusmatch($SM_id);
+			if ($Get_match[0]->status_match == 'available') {
+				$Status = 'done';
+				$this->Admin_model->Update_statusmatch($Status, $SM_id);
+				echo "<button type='button' class='btn btn-danger btn-xs' style='color:white;font-size: 13px;border-radius: 5px;' onclick='statusmatchupdate(" . $SM_id . ")'>
 			done
 			</button>";
-		} else {
-			$Status = 'available';
-			$this->Admin_model->Update_statusmatch($Status, $SM_id);
-			echo " <button type='button' class='btn btn-success btn-xs' style='color:white;font-size: 13px;border-radius: 5px;'onclick='statusmatchupdate(" . $SM_id . ")'>
+			} else {
+				$Status = 'available';
+				$this->Admin_model->Update_statusmatch($Status, $SM_id);
+				echo " <button type='button' class='btn btn-success btn-xs' style='color:white;font-size: 13px;border-radius: 5px;'onclick='statusmatchupdate(" . $SM_id . ")'>
 			available
 			</button>";
+			}
 		}
 	}
 
-	public function Statusshowe (){
-		$SM_id = $this->input->POST('SM_id');
-		$Get_match = $this->Admin_model->selectstatusmatch($SM_id);
-		if ($Get_match[0]->status_match == 'available') {
-			$Status = 'done';
-			$this->Admin_model->Update_statusmatch($Status, $SM_id);
-			echo "<button type='button' class='btn btn-danger btn-xs' style='color:white;font-size: 13px;border-radius: 5px;' onclick='statusmatchupdate(" . $SM_id . ")'>
-			done
-			</button>";
+	public function Statusshowe()
+	{
+		if ($this->session->userdata('username') == '') {
+			$data['username'] = "";
+			$data['password'] = "";
+			$data['result'] = "";
+			$this->load->view('Backend/Login', $data);
 		} else {
-			$Status = 'available';
-			$this->Admin_model->Update_statusmatch($Status, $SM_id);
-			echo " <button type='button' class='btn btn-success btn-xs' style='color:white;font-size: 13px;border-radius: 5px;'onclick='statusmatchupdate(" . $SM_id . ")'>
-			available
+			$sw_dis = $this->input->POST('sw_dis');
+			$Get_match = $this->Admin_model->selectstatusmatch($sw_dis);
+			if ($Get_match[0]->p_status == 1) {
+				$Status = 0;
+				$this->Admin_model->Update_statusmatch($Status, $sw_dis);
+				echo "<button type='button' class='btn btn-danger btn-xs' style='color:white;font-size: 13px;border-radius: 5px;' onclick='statusshowupdate(" . $sw_dis . ")'>
+			ปิดการใช้งาน
 			</button>";
+			} else {
+				$Status = 'available';
+				$this->Admin_model->Update_statusmatch($Status, $sw_dis);
+				echo " <button type='button' class='btn btn-success btn-xs' style='color:white;font-size: 13px;border-radius: 5px;'onclick='statusshowupdate(" . $sw_dis . ")'>
+			เปิดการใช้งาน
+			</button>";
+			}
 		}
 	}
-	
+
+	public function Propertyedit($idproperty)
+	{
+		if ($this->session->userdata('username') == '') {
+			$data['username'] = "";
+			$data['password'] = "";
+			$data['result'] = "";
+			$this->load->view('Backend/Login', $data);
+		} else {
+			// $idtouch = $this->input->post('id');
+			$data['propertydetail'] = $this->Admin_model->detailproperty($idproperty);
+			// foreach($data['touchdetail'] as $idcode){
+			//   $idcode     =   $idcode->id_code;
+			// }
+			// $idproperty = 1;
+			// $iddeed = 2;
+			//  $data['imagedeed'] = $this->Admin_model->Imagedeed_model($idcode,$iddeed);
+			//  $data['imageproperty'] = $this->Admin_model->Imageproperty_model($idcode,$idproperty);
+			$data['province'] = $this->Admin_model->province();
+			$data['tppt'] = $this->Admin_model->selecttypeppt();
+			$data['tpd'] = $this->Admin_model->selecttypepd();
+			$data['ShowPage'] = 'Backend/Insertproperty/Detailproperty';
+			$this->load->view('Backend/Indexview', $data);
+		}
+	}
+	public function Propertyforminsert()
+	{
+		if ($this->session->userdata('username') == '') {
+			$data['username'] = "";
+			$data['password'] = "";
+			$data['result'] = "";
+			$this->load->view('Backend/Login', $data);
+		} else {
+			$data['province'] = $this->Admin_model->province();
+			$data['tppt'] = $this->Admin_model->selecttypeppt();
+			$data['tpd'] = $this->Admin_model->selecttypepd();
+			$data['ShowPage'] = 'Backend/Insertproperty/Forminsertproperty';
+			$this->load->view('Backend/Indexview', $data);
+		}
+	}
+	public function Editproperty()
+	{
+		if ($this->session->userdata('username') == '') {
+			$data['username'] = "";
+			$data['password'] = "";
+			$data['result'] = "";
+			$this->load->view('Backend/Login', $data);
+		} else {
+
+			//    $imageproperty =   $this->input->post("imageproperty");
+			//    $imageproperty2  =  $this->input->post("imageproperty2");
+
+			$codepoduct  =  $this->input->post("codepoduct");
+			$codeproperty  =  $this->input->post("codeproperty");
+			$typeproduct  =  $this->input->post("typeproduct");
+			$typeproperty  =  $this->input->post("typeproperty");
+			$titleroperty =    $this->input->post("titleroperty");
+			$detailproperty =   $this->input->post("detailproperty");
+			$address =   $this->input->post("address");
+			$province  =  $this->input->post("province");
+			$dristrict =   $this->input->post("dristrict");
+			$sub_dristrict  =  $this->input->post("sub_dristrict");
+			$postcode =   $this->input->post("postcode");
+			$squarerai  =  $this->input->post("squarerai");
+			$squarengan =   $this->input->post("squarengan");
+			$squarewah  =  $this->input->post("squarewah");
+			$squaremeter =   $this->input->post("squaremeter");
+			$price =   $this->input->post("price");
+			$percen  =  $this->input->post("percen");
+			$typeopen =  $this->input->post("typeopen");
+			$limit_price =   $this->input->post("limit_price");
+			$start_date =   $this->input->post("start_date");
+			$end_date =   $this->input->post("end_date");
+
+			if (isset($_FILES['imageproperty']) && !empty($_FILES['imageproperty'])) {
+				$no_files = count($_FILES["imageproperty"]['name']);
+				for ($i = 0; $i < $no_files; $i++) {
+					$dateSv = date('ymd');
+					$type = strrchr($_FILES['imageproperty']['name'][$i], ".");
+					$newnamefile = rand(0, 999999);
+					$imageproperty =  $dateSv . $newnamefile . $type;
+					// $imageproperty =  $_FILES['imageproperty']['name'][$i];
+					$_FILES['file']['name'] = $imageproperty;
+					$_FILES['file']['type'] = $_FILES['imageproperty']['type'][$i];
+					$_FILES['file']['tmp_name'] = $_FILES['imageproperty']['tmp_name'][$i];
+					$_FILES['file']['error'] = $_FILES['imageproperty']['error'][$i];
+					$_FILES['file']['size'] = $_FILES['imageproperty']['size'][$i];
+					$config['upload_path']          = './property/' . $codeproperty;
+					$config['allowed_types']         = 'pdf|Pdf|jpg|jpeg|png';
+					$config['remove_spaces'] = 'FALSE';
+
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+					if (!is_dir('./property/' . $codeproperty)) {
+						mkdir('./property/' . $codeproperty, 0777, true);
+					}
+
+					if ($this->upload->do_upload('file')) {
+						// $this->Admin_model->insertumgheader($codepoduct, $codeproperty, $imageproperty);
+						$this->Admin_model->Update_image($codepoduct, $codeproperty, $imageproperty);
+						$uploadData = $this->upload->data();
+					}
+				}
+			}
+
+			if (isset($_FILES['imageproperty2']) && !empty($_FILES['imageproperty2'])) {
+				$no_filesLg = count($_FILES["imageproperty2"]['name']);
+				for ($i = 0; $i < $no_filesLg; $i++) {
+					$dateSv = date('ymd');
+					$type = strrchr($_FILES['imageproperty2']['name'][$i], ".");
+					$newnamefile = rand(0, 999999);
+					$imageproperty2 =  $dateSv . $newnamefile . $type;
+					// $imageproperty2 =  $_FILES['imageproperty2']['name'][$i];
+					$_FILES['file']['name'] = $imageproperty2;
+					$_FILES['file']['type'] = $_FILES['imageproperty2']['type'][$i];
+					$_FILES['file']['tmp_name'] = $_FILES['imageproperty2']['tmp_name'][$i];
+					$_FILES['file']['error'] = $_FILES['imageproperty2']['error'][$i];
+					$_FILES['file']['size'] = $_FILES['imageproperty2']['size'][$i];
+					$config['upload_path']          = './property/' . $codeproperty;
+					$config['allowed_types']         = 'pdf|Pdf|jpg|jpeg|png';
+					$config['remove_spaces'] = 'FALSE';
+
+					$this->load->library('upload', $config);
+					$this->upload->initialize($config);
+
+					if (!is_dir('./property/' . $codeproperty)) {
+						mkdir('./property/' . $codeproperty, 0777, true);
+					}
+					if ($this->upload->do_upload('file')) {
+						// $this->Admin_model->inserimgdetail($codepoduct, $codeproperty, $imageproperty2);
+						$uploadData = $this->upload->data();
+					}
+				}
+			}
+
+			// $insert = true;
+			$insert = $this->Admin_model->Update_property(
+				$codepoduct,
+				$codeproperty,
+				$typeproduct,
+				$typeproperty,
+				$titleroperty,
+				$detailproperty,
+				$address,
+				$province,
+				$dristrict,
+				$sub_dristrict,
+				$postcode,
+				$squarerai,
+				$squarengan,
+				$squarewah,
+				$squaremeter,
+				$price,
+				$percen,
+				$typeopen,
+				$limit_price,
+				$start_date,
+				$end_date
+			);
+
+			if ($insert) {
+				$data = array('success' => true, 'msg1' => 'Form has been submitted successfully2');
+			} else {
+				$data = array('success' => false, 'msg' => 'Form has been not submitted');
+			}
+
+			echo json_encode($data);
+			// $data['ShowPage'] = 'Backend/Insertproperty/Forminsertproperty';
+			// $this->load->view('Backend/Indexview', $data);
+		}
+	}
 }

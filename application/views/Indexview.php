@@ -106,9 +106,9 @@ background: linear-gradient(160deg, rgba(34,193,195,1) 0%, rgba(8,94,172,1) 100%
                 <h3><span style="color:#fefefe;">Precious</span> <span class="text-warning">wealth property</span></h3>
                 <p></p>
                 <div class="social-links">
-                    <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                    <a href="#" class="youtube"><i class="bx bxl-youtube"></i></a>
-                    <a href="#" class="line"><i class="bi bi-line"></i></a>
+                    <a href="https://web.facebook.com/preciouswealthproperty" target="_blank" class="facebook"><i class="bx bxl-facebook"></i></a>
+                    <a href="https://www.youtube.com/@preciouswealthproperty" target="_blank" class="youtube"><i class="bx bxl-youtube"></i></a>
+                    <a href="https://liff.line.me/1645278921-kWRPP32q/?accountId=909odigl"  target="_blank" class="line"><i class="bi bi-line"></i></a>
 
                 </div>
                 <div class="copyright">
