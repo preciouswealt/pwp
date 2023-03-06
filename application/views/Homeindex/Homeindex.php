@@ -276,7 +276,7 @@
                             <div class="item">
                                 <div class="card">
                                     <?php if ($ipro->status_match == "available") { ?>
-                                        <img src="<?php echo base_url('property/' . $ipro->p_code . '/' . $ipro->p_image); ?>" alt="properties" style="width:70%;text-align:center;" />
+                                        <img src="<?php echo base_url('property/' . $ipro->p_code . '/' . $ipro->p_image); ?>" alt="properties" style="width:100%;text-align:center;" />
                                     <?php } else { ?>
                                         <div style=" background-color: red;background-image:url('<?php echo base_url('property/' . $ipro->p_code . '/' . $ipro->p_image); ?>');
                                         background-size:cover; background-position: center;display: grid;align-content:center;justify-content:center;opacity:0.5;height: 18vh;">
@@ -344,7 +344,7 @@
                             <div class="item">
                                 <div class="card">
                                 <?php if ($ipro->status_match == "available") { ?>
-                                        <img src="<?php echo base_url('property/' . $ipro->p_code . '/' . $ipro->p_image); ?>" alt="properties" style="width:70%;text-align:center;" />
+                                        <img src="<?php echo base_url('property/' . $ipro->p_code . '/' . $ipro->p_image); ?>" alt="properties" style="width:100%;text-align:center;" />
                                     <?php } else { ?>
                                         <div style=" background-color: red;background-image:url('<?php echo base_url('property/' . $ipro->p_code . '/' . $ipro->p_image); ?>');
     background-size:cover; background-position: center;display: grid;align-content:center;justify-content:center;opacity:0.5;height: 18vh;">

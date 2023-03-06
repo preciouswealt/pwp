@@ -184,6 +184,11 @@ class Control_admin extends CI_Controller
 			$start_date =   $this->input->post("start_date");
 			$end_date =   $this->input->post("end_date");
 
+			$Fristname = $this->input->post("Fristname");
+			$Lastname = $this->input->post("Lastname");
+			$phone = $this->input->post("phone");
+			$IDline = $this->input->post("IDline");
+
 			if (isset($_FILES['imageproperty']) && !empty($_FILES['imageproperty'])) {
 				$no_files = count($_FILES["imageproperty"]['name']);
 				for ($i = 0; $i < $no_files; $i++) {
@@ -268,6 +273,15 @@ class Control_admin extends CI_Controller
 				$limit_price,
 				$start_date,
 				$end_date
+			);
+
+			$this->Admin_model->Insert_userproperty(
+				$codepoduct,
+				$codeproperty,
+				$Fristname,
+				$Lastname,
+				$phone,
+				$IDline
 			);
 
 			if ($insert) {
@@ -949,6 +963,10 @@ class Control_admin extends CI_Controller
 			$limit_price =   $this->input->post("limit_price");
 			$start_date =   $this->input->post("start_date");
 			$end_date =   $this->input->post("end_date");
+			$Fristname = $this->input->post("Fristname");
+			$Lastname = $this->input->post("Lastname");
+			$phone = $this->input->post("phone");
+			$IDline = $this->input->post("IDline");
 
 			if (isset($_FILES['imageproperty']) && !empty($_FILES['imageproperty'])) {
 				$no_files = count($_FILES["imageproperty"]['name']);
@@ -1034,6 +1052,15 @@ class Control_admin extends CI_Controller
 				$limit_price,
 				$start_date,
 				$end_date
+			);
+			
+			$this->Admin_model->update_userproperty(
+				$codepoduct,
+				$codeproperty,
+				$Fristname,
+				$Lastname,
+				$phone,
+				$IDline
 			);
 
 			if ($insert) {

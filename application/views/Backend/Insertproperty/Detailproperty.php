@@ -37,22 +37,22 @@
                             <div class="mb-2">
                                 <p><b>รูปภาพทรัพย์ย่อย</b></p>
                                 <div>
-                                <div>
                                     <div>
-                                        <table class="table table-bordered">
-                                            <tr>
-                                                <td style="width:50%;text-align:center">
-                                                    <img src="<?php echo base_url('property/' . $detail->p_code . '/' . $detail->p_image); ?>" alt="properties" style="width:50%;text-align:center;" />
-                                                    <!-- <a class="btn btn-danger" href="<?php echo site_url('Control_admin/Propertyedit/' . $detail->p_image . ''); ?>">ลบ</a> -->
-                                                </td>
-                                                <!-- <td>
+                                        <div>
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <td style="width:50%;text-align:center">
+                                                        <img src="<?php echo base_url('property/' . $detail->p_code . '/' . $detail->p_image); ?>" alt="properties" style="width:50%;text-align:center;" />
+                                                        <!-- <a class="btn btn-danger" href="<?php echo site_url('Control_admin/Propertyedit/' . $detail->p_image . ''); ?>">ลบ</a> -->
+                                                    </td>
+                                                    <!-- <td>
                                                 <a class="btn btn-danger" href="</?php echo site_url('Control_admin/Propertyedit/' . $detail->p_image . ''); ?>">ลบ</a>
                                                 </td> -->
-                                            </tr>
-                                        </table>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <input type="file" id="imageproperty2" style="border: 1px solid #0597b5;" name="imageproperty2" class="form-control" multiple>
                                     </div>
-                                    <input type="file" id="imageproperty2" style="border: 1px solid #0597b5;" name="imageproperty2" class="form-control" multiple>
-                                </div>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                             <div class="mb-2">
                                 <p><b>รหัส product </b></p>
                                 <div>
-                                    <input type="text" name="codepoduct" id="codepoduct" style="border: 1px solid #0597b5;" class="form-control" minlength="3" placeholder="รหัส product" value="<?php echo $detail->p_id ?>">
+                                    <input type="text" name="codepoduct" id="codepoduct" style="border: 1px solid #0597b5;" class="form-control"  placeholder="รหัส product" value="<?php echo $detail->p_id ?>">
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                                 <p><b>รหัส ทรัพย์ </b></p>
 
                                 <div>
-                                    <input type="text" name="codeproperty" id="codeproperty" style="border: 1px solid #0597b5;" class="form-control" minlength="3" placeholder="รหัส ทรัพย์" value="<?php echo $detail->p_code ?>">
+                                    <input type="text" name="codeproperty" id="codeproperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="รหัส ทรัพย์" value="<?php echo $detail->p_code ?>">
                                 </div>
                             </div>
                         </div>
@@ -107,12 +107,48 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="mb-2">
+                                <p><b>ฃื่อเจ้าของทรัพย์</b></p>
+                                <div>
+                                    <input type="text" name="Fristname" id="Fristname" style="border: 1px solid #0597b5;" class="form-control" value="<?php echo $detail->fristname ?>">
+                                    <!-- <input type="text" name="titleroperty" id="titleroperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="หัวข้อทรัพย์" value="<ฝ?php echo $detail->p_name ?>"> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-2">
+                                <p><b>นามสกุลเจ้าของทรัพย์</b></p>
+                                <div>
+                                    <input type="text" name="Lastname" id="Lastname" style="border: 1px solid #0597b5;" class="form-control" value="<?php echo $detail->lastname ?>">
+                                    <!-- <input type="text" name="titleroperty" id="titleroperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="หัวข้อทรัพย์" value="<ฝ?php echo $detail->p_name ?>"> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-2">
+                                <p><b>เบอร์โทร</b></p>
+                                <div>
+                                    <input type="text" name="phone" id="phone" style="border: 1px solid #0597b5;" class="form-control" value="<?php echo $detail->phone ?>">
+                                    <!-- <input type="text" name="titleroperty" id="titleroperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="หัวข้อทรัพย์" value="<ฝ?php echo $detail->p_name ?>"> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-2">
+                                <p><b>ID_line</b></p>
+                                <div>
+                                    <input type="text" name="IDline" id="IDline" style="border: 1px solid #0597b5;" class="form-control" value="<?php echo $detail->idline ?>">
+                                    <!-- <input type="text" name="titleroperty" id="titleroperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="หัวข้อทรัพย์" value="<ฝ?php echo $detail->p_name ?>"> -->
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-4">
                             <div class="mb-2">
                                 <p><b>หัวข้อทรัพย์</b></p>
                                 <div>
                                     <textarea name="titleroperty" id="titleroperty" style="width:100%;height: 144px;"><?php echo $detail->p_name; ?></textarea>
-                                    <!-- <input type="text" name="titleroperty" id="titleroperty" style="border: 1px solid #0597b5;" class="form-control" minlength="3" placeholder="หัวข้อทรัพย์" value="<ฝ?php echo $detail->p_name ?>"> -->
+                                    <!-- <input type="text" name="titleroperty" id="titleroperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="หัวข้อทรัพย์" value="<ฝ?php echo $detail->p_name ?>"> -->
                                 </div>
                             </div>
                         </div>
@@ -121,7 +157,7 @@
                                 <p><b>ลายระเอียดทรัพย์</b></p>
                                 <div>
                                     <textarea name="detailproperty" id="detailproperty"><?php echo $detail->p_detail; ?></textarea>
-                                    <!-- <input type="text" name="detailproperty" id="detailproperty" style="border: 1px solid #0597b5;" class="form-control" minlength="3" placeholder="ลายระเอียดทรัพย์" value="<ฝ?php echo $detail->p_detail ?>"> -->
+                                    <!-- <input type="text" name="detailproperty" id="detailproperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="ลายระเอียดทรัพย์" value="<ฝ?php echo $detail->p_detail ?>"> -->
                                 </div>
                             </div>
                         </div>
@@ -130,7 +166,7 @@
                                 <p><b>ที่อยู่</b></p>
                                 <div>
                                     <textarea name="address" id="address"><?php echo $detail->p_address; ?></textarea>
-                                    <!-- <input type="text" name="address" id="address" style="border: 1px solid #0597b5;" class="form-control" minlength="3" placeholder="ที่อยู่" </?php echo $detail->p_address; ?>> -->
+                                    <!-- <input type="text" name="address" id="address" style="border: 1px solid #0597b5;" class="form-control"  placeholder="ที่อยู่" </?php echo $detail->p_address; ?>> -->
                                 </div>
                             </div>
                         </div>
@@ -197,7 +233,7 @@
                                     <select name="postcode" id="postcode" style="border: 1px solid #0597b5;" disabled class="form-control">
                                         <option value=" <?php echo $detail->zipcode;  ?>"> <?php echo $detail->zipcode;  ?></option>
                                     </select>
-                                    <!-- <input type="text" name="postcode" id="postcode" class="form-control"  minlength="3" placeholder="postcode"> -->
+                                    <!-- <input type="text" name="postcode" id="postcode" class="form-control"   placeholder="postcode"> -->
                                 </div>
                             </div>
                         </div>
@@ -205,7 +241,7 @@
                             <div class="mb-2">
                                 <p><b>ขนาด ไร่</b></p>
                                 <div>
-                                    <input type="text" name="squarerai" id="squarerai" style="border: 1px solid #0597b5;" class="form-control" minlength="3" placeholder="ขนาด ไร่" value="<?php echo $detail->square_rai ?>">
+                                    <input type="text" name="squarerai" id="squarerai" style="border: 1px solid #0597b5;" class="form-control"  placeholder="ขนาด ไร่" value="<?php echo $detail->square_rai ?>">
                                 </div>
                             </div>
                         </div>
@@ -213,7 +249,7 @@
                             <div class="mb-2">
                                 <p><b>ขนาด งาน</b></p>
                                 <div>
-                                    <input type="text" name="squarengan" id="squarengan" style="border: 1px solid #0597b5;" class="form-control" minlength="3" placeholder="ขนาด งาน" value="<?php echo $detail->square_ngan ?>">
+                                    <input type="text" name="squarengan" id="squarengan" style="border: 1px solid #0597b5;" class="form-control"  placeholder="ขนาด งาน" value="<?php echo $detail->square_ngan ?>">
                                 </div>
                             </div>
                         </div>
@@ -221,7 +257,7 @@
                             <div class="mb-2">
                                 <p><b>ขนาด ตารางวา</b></p>
                                 <div>
-                                    <input type="text" name="squarewah" id="squarewah" style="border: 1px solid #0597b5;" class="form-control" minlength="3" placeholder="ขนาด ตารางวา" value="<?php echo $detail->square_wah ?>">
+                                    <input type="text" name="squarewah" id="squarewah" style="border: 1px solid #0597b5;" class="form-control"  placeholder="ขนาด ตารางวา" value="<?php echo $detail->square_wah ?>">
                                 </div>
                             </div>
                         </div>
@@ -229,7 +265,7 @@
                             <div class="mb-2">
                                 <p><b>ขนาด ตารางเมตร</b></p>
                                 <div>
-                                    <input type="text" name="squaremeter" id="squaremeter" style="border: 1px solid #0597b5;" class="form-control" minlength="3" placeholder="ขนาด ตารางเมตร" value="<?php echo $detail->square_meter ?>">
+                                    <input type="text" name="squaremeter" id="squaremeter" style="border: 1px solid #0597b5;" class="form-control"  placeholder="ขนาด ตารางเมตร" value="<?php echo $detail->square_meter ?>">
                                 </div>
                             </div>
                         </div>
@@ -237,7 +273,7 @@
                             <div class="mb-2">
                                 <p><b>ราคา</b></p>
                                 <div>
-                                    <input type="text" name="price" id="price" style="border: 1px solid #0597b5;" class="form-control" minlength="3" placeholder="ราคา" value="<?php echo $detail->p_price ?>">
+                                    <input type="text" name="price" id="price" style="border: 1px solid #0597b5;" class="form-control"  placeholder="ราคา" value="<?php echo $detail->p_price ?>">
                                 </div>
                             </div>
                         </div>
@@ -245,7 +281,7 @@
                             <div class="mb-2">
                                 <p><b>เปอร์เซ็น</b></p>
                                 <div>
-                                    <input type="text" name="percen" id="percen" style="border: 1px solid #0597b5;" class="form-control" minlength="3" placeholder="เปอร์เซ็น" value="<?php echo $detail->percen ?>">
+                                    <input type="text" name="percen" id="percen" style="border: 1px solid #0597b5;" class="form-control"  placeholder="เปอร์เซ็น" value="<?php echo $detail->percen ?>">
                                 </div>
                             </div>
                         </div>
@@ -264,7 +300,7 @@
                                         <?php } ?>
 
                                     </select>
-                                    <!-- <input type="text" name="typeopen" id="typeopen" style="border: 1px solid #0597b5;" class="form-control" minlength="3" placeholder="ทรัพย์ เปิด/เปิด"> -->
+                                    <!-- <input type="text" name="typeopen" id="typeopen" style="border: 1px solid #0597b5;" class="form-control"  placeholder="ทรัพย์ เปิด/เปิด"> -->
                                 </div>
                             </div>
                         </div>
@@ -272,7 +308,7 @@
                             <div class="mb-2">
                                 <p><b>วงเงิน (จดจำนอง/ขายฝาก)</b></p>
                                 <div>
-                                    <input type="text" name="limit_price" id="limit_price" style="border: 1px solid #0597b5;" class="form-control" minlength="3" placeholder="จดจำนอง/ขายฝาก" value="<?php echo $detail->price_limit ?>">
+                                    <input type="text" name="limit_price" id="limit_price" style="border: 1px solid #0597b5;" class="form-control"  placeholder="จดจำนอง/ขายฝาก" value="<?php echo $detail->price_limit ?>">
                                 </div>
                             </div>
                         </div>
@@ -280,7 +316,7 @@
                             <div class="mb-2">
                                 <p><b>วันที่เริ่มสัญญา</b></p>
                                 <div>
-                                    <input type="date" name="start_date" id="start_date" style="border: 1px solid #0597b5;" class="form-control" minlength="3" value="<?php echo $detail->start_date ?>">
+                                    <input type="date" name="start_date" id="start_date" style="border: 1px solid #0597b5;" class="form-control"  value="<?php echo $detail->start_date ?>">
                                 </div>
                             </div>
                         </div>
@@ -288,7 +324,7 @@
                             <div class="mb-2">
                                 <p><b>วันที่สิ้นสุดสัญญา</b></p>
                                 <div>
-                                    <input type="date" name="end_date" id="end_date" style="border: 1px solid #0597b5;" class="form-control" minlength="3" value="<?php echo $detail->end_date ?>">
+                                    <input type="date" name="end_date" id="end_date" style="border: 1px solid #0597b5;" class="form-control"  value="<?php echo $detail->end_date ?>">
                                 </div>
                             </div>
                         </div>
@@ -373,6 +409,11 @@
             var typeproperty = document.getElementById('typeproperty').value;
             var titleroperty = document.getElementById('titleroperty').value;
             var detailproperty = document.getElementById('detailproperty').value;
+            var Fristname = document.getElementById('Fristname').value;
+            var Lastname = document.getElementById('Lastname').value;
+            var phone = document.getElementById('phone').value;
+            var IDline = document.getElementById('IDline').value;
+
             var address = document.getElementById('address').value;
             var province = document.getElementById('province').value;
             var dristrict = document.getElementById('dristrict').value;
@@ -398,6 +439,12 @@
             datas.append("typeproperty", typeproperty);
             datas.append("titleroperty", titleroperty);
             datas.append("detailproperty", detailproperty);
+
+            datas.append("Fristname", Fristname);
+            datas.append("Lastname", Lastname);
+            datas.append("phone", phone);
+            datas.append("IDline", IDline);
+
             datas.append("address", address);
             datas.append("province", province);
             datas.append("dristrict", dristrict);
