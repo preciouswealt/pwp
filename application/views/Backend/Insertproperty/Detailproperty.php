@@ -21,11 +21,8 @@
                                             <tr>
                                                 <td style="width:50%;text-align:center">
                                                     <img src="<?php echo base_url('property/' . $detail->p_code . '/' . $detail->p_image); ?>" alt="properties" style="width:50%;text-align:center;" />
-                                                    <!-- <a class="btn btn-danger" href="<?php echo site_url('Control_admin/Propertyedit/' . $detail->p_image . ''); ?>">ลบ</a> -->
+                                                    <!-- <a class="btn btn-danger" href="</?php echo site_url('Control_admin/Propertyedit/' . $detail->p_image . ''); ?>">ลบ</a> -->
                                                 </td>
-                                                <!-- <td>
-                                                <a class="btn btn-danger" href="</?php echo site_url('Control_admin/Propertyedit/' . $detail->p_image . ''); ?>">ลบ</a>
-                                                </td> -->
                                             </tr>
                                         </table>
                                     </div>
@@ -43,11 +40,8 @@
                                                 <tr>
                                                     <td style="width:50%;text-align:center">
                                                         <img src="<?php echo base_url('property/' . $detail->p_code . '/' . $detail->p_image); ?>" alt="properties" style="width:50%;text-align:center;" />
-                                                        <!-- <a class="btn btn-danger" href="<?php echo site_url('Control_admin/Propertyedit/' . $detail->p_image . ''); ?>">ลบ</a> -->
+                                                        <!-- <a class="btn btn-danger" href="</?php echo site_url('Control_admin/Propertyedit/' . $detail->p_image . ''); ?>">ลบ</a> -->
                                                     </td>
-                                                    <!-- <td>
-                                                <a class="btn btn-danger" href="</?php echo site_url('Control_admin/Propertyedit/' . $detail->p_image . ''); ?>">ลบ</a>
-                                                </td> -->
                                                 </tr>
                                             </table>
                                         </div>
@@ -69,7 +63,6 @@
                         <div class="col-md-3">
                             <div class="mb-2">
                                 <p><b>รหัส ทรัพย์ </b></p>
-
                                 <div>
                                     <input type="text" name="codeproperty" id="codeproperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="รหัส ทรัพย์" value="<?php echo $detail->p_code ?>">
                                 </div>
@@ -112,7 +105,6 @@
                                 <p><b>ฃื่อเจ้าของทรัพย์</b></p>
                                 <div>
                                     <input type="text" name="Fristname" id="Fristname" style="border: 1px solid #0597b5;" class="form-control" value="<?php echo $detail->fristname ?>">
-                                    <!-- <input type="text" name="titleroperty" id="titleroperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="หัวข้อทรัพย์" value="<ฝ?php echo $detail->p_name ?>"> -->
                                 </div>
                             </div>
                         </div>
@@ -121,7 +113,6 @@
                                 <p><b>นามสกุลเจ้าของทรัพย์</b></p>
                                 <div>
                                     <input type="text" name="Lastname" id="Lastname" style="border: 1px solid #0597b5;" class="form-control" value="<?php echo $detail->lastname ?>">
-                                    <!-- <input type="text" name="titleroperty" id="titleroperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="หัวข้อทรัพย์" value="<ฝ?php echo $detail->p_name ?>"> -->
                                 </div>
                             </div>
                         </div>
@@ -130,7 +121,6 @@
                                 <p><b>เบอร์โทร</b></p>
                                 <div>
                                     <input type="text" name="phone" id="phone" style="border: 1px solid #0597b5;" class="form-control" value="<?php echo $detail->phone ?>">
-                                    <!-- <input type="text" name="titleroperty" id="titleroperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="หัวข้อทรัพย์" value="<ฝ?php echo $detail->p_name ?>"> -->
                                 </div>
                             </div>
                         </div>
@@ -139,7 +129,6 @@
                                 <p><b>ID_line</b></p>
                                 <div>
                                     <input type="text" name="IDline" id="IDline" style="border: 1px solid #0597b5;" class="form-control" value="<?php echo $detail->idline ?>">
-                                    <!-- <input type="text" name="titleroperty" id="titleroperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="หัวข้อทรัพย์" value="<ฝ?php echo $detail->p_name ?>"> -->
                                 </div>
                             </div>
                         </div>
@@ -148,7 +137,6 @@
                                 <p><b>หัวข้อทรัพย์</b></p>
                                 <div>
                                     <textarea name="titleroperty" id="titleroperty" style="width:100%;height: 144px;"><?php echo $detail->p_name; ?></textarea>
-                                    <!-- <input type="text" name="titleroperty" id="titleroperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="หัวข้อทรัพย์" value="<ฝ?php echo $detail->p_name ?>"> -->
                                 </div>
                             </div>
                         </div>
@@ -157,7 +145,6 @@
                                 <p><b>ลายระเอียดทรัพย์</b></p>
                                 <div>
                                     <textarea name="detailproperty" id="detailproperty"><?php echo $detail->p_detail; ?></textarea>
-                                    <!-- <input type="text" name="detailproperty" id="detailproperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="ลายระเอียดทรัพย์" value="<ฝ?php echo $detail->p_detail ?>"> -->
                                 </div>
                             </div>
                         </div>
@@ -166,7 +153,6 @@
                                 <p><b>ที่อยู่</b></p>
                                 <div>
                                     <textarea name="address" id="address"><?php echo $detail->p_address; ?></textarea>
-                                    <!-- <input type="text" name="address" id="address" style="border: 1px solid #0597b5;" class="form-control"  placeholder="ที่อยู่" </?php echo $detail->p_address; ?>> -->
                                 </div>
                             </div>
                         </div>
@@ -233,7 +219,6 @@
                                     <select name="postcode" id="postcode" style="border: 1px solid #0597b5;" disabled class="form-control">
                                         <option value=" <?php echo $detail->zipcode;  ?>"> <?php echo $detail->zipcode;  ?></option>
                                     </select>
-                                    <!-- <input type="text" name="postcode" id="postcode" class="form-control"   placeholder="postcode"> -->
                                 </div>
                             </div>
                         </div>
@@ -290,7 +275,6 @@
                                 <p><b>ประเภททรัพย์ (ทรัพย์ เปิด/เปิด)</b></p>
                                 <div>
                                     <select name="typeopen" id="typeopen" style="border: 1px solid #0597b5;" class="form-control">
-                                        <!-- <option value="">เลือกประเภททรัพย์ (ทรัพย์ เปิด/ปิด)</option> -->
                                         <?php if ($detail->type_open_property == "ํYES") { ?>
                                             <option value="ํYES" selected>เปิด</option>
                                             <option value="NO">ปิด</option>
@@ -300,7 +284,6 @@
                                         <?php } ?>
 
                                     </select>
-                                    <!-- <input type="text" name="typeopen" id="typeopen" style="border: 1px solid #0597b5;" class="form-control"  placeholder="ทรัพย์ เปิด/เปิด"> -->
                                 </div>
                             </div>
                         </div>
@@ -328,8 +311,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- </form> -->
-
                     </div>
 
                 <?php } ?>
