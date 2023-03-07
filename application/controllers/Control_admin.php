@@ -189,6 +189,14 @@ class Control_admin extends CI_Controller
 			$phone = $this->input->post("phone");
 			$IDline = $this->input->post("IDline");
 
+			// if($typeproties == '1'){
+			// 	$idran = rand(0, 99999);
+			// 	$idcode = "CM-".$idran;
+			// }else{
+			// 	$idran = rand(0, 99999);
+			// 	$idcode = "MG-".$idran;
+			// }
+
 			if (isset($_FILES['imageproperty']) && !empty($_FILES['imageproperty'])) {
 				$no_files = count($_FILES["imageproperty"]['name']);
 				for ($i = 0; $i < $no_files; $i++) {
@@ -992,7 +1000,7 @@ class Control_admin extends CI_Controller
 					}
 
 					if ($this->upload->do_upload('file')) {
-						// $this->Admin_model->insertumgheader($codepoduct, $codeproperty, $imageproperty);
+						$this->Admin_model->insertumgheader($codepoduct, $codeproperty, $imageproperty);
 						$this->Admin_model->Update_image($codepoduct, $codeproperty, $imageproperty);
 						$uploadData = $this->upload->data();
 					}
@@ -1023,7 +1031,7 @@ class Control_admin extends CI_Controller
 						mkdir('./property/' . $codeproperty, 0777, true);
 					}
 					if ($this->upload->do_upload('file')) {
-						// $this->Admin_model->inserimgdetail($codepoduct, $codeproperty, $imageproperty2);
+						$this->Admin_model->inserimgdetail($codepoduct, $codeproperty, $imageproperty2);
 						$uploadData = $this->upload->data();
 					}
 				}
@@ -1053,7 +1061,7 @@ class Control_admin extends CI_Controller
 				$start_date,
 				$end_date
 			);
-			
+
 			$this->Admin_model->update_userproperty(
 				$codepoduct,
 				$codeproperty,
@@ -1073,5 +1081,42 @@ class Control_admin extends CI_Controller
 			// $data['ShowPage'] = 'Backend/Insertproperty/Forminsertproperty';
 			// $this->load->view('Backend/Indexview', $data);
 		}
+	}
+
+	public function Checkp_code()
+	{
+		$p_code = $this->input->get('p_code');
+		$res = $this->Admin_model->Checkp_code($p_code);
+		$results = array();
+		if ($res) {
+			foreach ($res as $r) {
+				$results[] = array(
+					'Result' => "FALSE"
+				);
+			}
+		} else {
+			$results[] = array(
+				'Result' => "TRUE"
+			);
+		}
+		echo json_encode($results);
+	}
+	public function Checkp_id()
+	{
+		$p_id = $this->input->get('p_id');
+		$res = $this->Admin_model->Checkp_id($p_id);
+		$results = array();
+		if ($res) {
+			foreach ($res as $r) {
+				$results[] = array(
+					'Result' => "FALSE"
+				);
+			}
+		} else {
+			$results[] = array(
+				'Result' => "TRUE"
+			);
+		}
+		echo json_encode($results);
 	}
 }

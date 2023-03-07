@@ -420,7 +420,7 @@ INNER JOIN  typeproperties as tp ON p.p_typeproperties = tp.id";
 		return $this->db->query($query);
 	}
 
-	public function update_userproperty(
+	public function Update_userproperty(
 		$codepoduct,
 		$codeproperty,
 		$Fristname,
@@ -431,6 +431,17 @@ INNER JOIN  typeproperties as tp ON p.p_typeproperties = tp.id";
 		$query = "UPDATE  userproject SET p_id = '$codepoduct',p_code = '$codeproperty',fristname = '$Fristname',lastname = '$Lastname',phone = '$phone',idline = '$IDline'
 		WHERE p_id = '$codepoduct' AND  p_code = '$codeproperty'";
 		return $this->db->query($query);
+	}
+
+	public function Checkp_code($p_code){
+		$query = "select if(p_code = '$p_code','FALSE','TRUE') AS Result  from properties WHERE p_code = '$p_code'";
+		// $query = "select p_code AS Result  from properties WHERE p_code = '$p_code'";
+		return $this->db->query($query)->result();
+	}
+	public function Checkp_id($p_id){
+		$query = "select if(p_id = '$p_id','FALSE','TRUE') AS Result  from properties WHERE p_id = '$p_id'";
+		// $query = "select p_code AS Result  from properties WHERE p_code = '$p_code'";
+		return $this->db->query($query)->result();
 	}
 
 }

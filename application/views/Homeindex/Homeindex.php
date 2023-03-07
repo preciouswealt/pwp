@@ -45,7 +45,7 @@
                 <div class="row gx-5">
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <div class="position-relative">
-                            <img class="position-absolute  rounded wow zoomIn" data-wow-delay="0.3s" src="<?php echo base_url(); ?>assets/img/logo.jpg" style="object-fit: cover;width:100%">
+                            <img class="position-absolute  rounded wow zoomIn" data-wow-delay="0.3s" src="<?php echo base_url('assets/img/' . $b->imageabout); ?>" style="object-fit: cover;width:100%">
                         </div>
                     </div>
                     <div class="col-lg-8">
@@ -121,8 +121,33 @@
                                         <hr style="margin: 0.3rem 0;" />
                                         <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-geo-alt" style="color:#049bba"></i> <?php echo $ipro->district . ',' . $ipro->supdistrict ?></p>
                                         <hr style="margin: 0.3rem 0;" />
-                                        <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-plus-square" style="color:#049bba"></i> พื้นที่ <?php echo $ipro->square_meter ?> ตร.ม,
-                                            <?php echo $ipro->square_wah ?> ตร.วา</p>
+                                        <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-plus-square" style="color:#049bba"></i> พื้นที่
+                                            <?php
+                                            if ($ipro->square_meter == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_meter;
+                                            }
+                                            ?> ตร.ม,
+                                            <?php if ($ipro->square_rai == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_rai;
+                                            }
+                                            ?> ไร่,
+                                            <?php
+                                            if ($ipro->square_ngan == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_ngan;
+                                            } ?> งาน,
+                                            <?php
+                                            if ($ipro->square_wah == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_wah;
+                                            }
+                                            ?> ตร.วา</p>
                                         <hr style="margin: 0.3rem 0;" />
                                         <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-credit-card" style="color:#049bba"></i> มูลค่าทรัพย์ <?php
                                                                                                                                                                 if ($ipro->p_price == '') {
@@ -179,8 +204,33 @@
                                         <hr style="margin: 0.3rem 0;" />
                                         <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-geo-alt" style="color:#049bba"></i> <?php echo $ipro->district . ',' . $ipro->supdistrict ?></p>
                                         <hr style="margin: 0.3rem 0;" />
-                                        <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-plus-square" style="color:#049bba"></i> พื้นที่ <?php echo $ipro->square_meter ?> ตร.ม,
-                                            <?php echo $ipro->square_wah ?> ตร.วา</p>
+                                        <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-plus-square" style="color:#049bba"></i> พื้นที่
+                                            <?php
+                                            if ($ipro->square_meter == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_meter;
+                                            }
+                                            ?> ตร.ม,
+                                            <?php if ($ipro->square_rai == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_rai;
+                                            }
+                                            ?> ไร่,
+                                            <?php
+                                            if ($ipro->square_ngan == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_ngan;
+                                            } ?> งาน,
+                                            <?php
+                                            if ($ipro->square_wah == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_wah;
+                                            }
+                                            ?> ตร.วา</p>
                                         <hr style="margin: 0.3rem 0;" />
                                         <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-credit-card" style="color:#049bba"></i> มูลค่าทรัพย์ <?php
                                                                                                                                                                 if ($ipro->p_price == '') {
@@ -238,8 +288,33 @@
                                         <hr style="margin: 0.3rem 0;" />
                                         <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-geo-alt" style="color:#049bba"></i> <?php echo $ipro->district . ',' . $ipro->supdistrict ?></p>
                                         <hr style="margin: 0.3rem 0;" />
-                                        <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-plus-square" style="color:#049bba"></i> พื้นที่ <?php echo $ipro->square_meter ?> ตร.ม,
-                                            <?php echo $ipro->square_wah ?> ตร.วา</p>
+                                        <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-plus-square" style="color:#049bba"></i> พื้นที่
+                                            <?php
+                                            if ($ipro->square_meter == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_meter;
+                                            }
+                                            ?> ตร.ม,
+                                            <?php if ($ipro->square_rai == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_rai;
+                                            }
+                                            ?> ไร่,
+                                            <?php
+                                            if ($ipro->square_ngan == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_ngan;
+                                            } ?> งาน,
+                                            <?php
+                                            if ($ipro->square_wah == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_wah;
+                                            }
+                                            ?> ตร.วา</p>
                                         <hr style="margin: 0.3rem 0;" />
                                         <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-credit-card" style="color:#049bba"></i> มูลค่าทรัพย์ <?php
                                                                                                                                                                 if ($ipro->p_price == '') {
@@ -307,8 +382,33 @@
                                         <hr style="margin: 0.3rem 0;" />
                                         <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-geo-alt" style="color:#049bba"></i> <?php echo $ipro->district . ',' . $ipro->supdistrict ?></p>
                                         <hr style="margin: 0.3rem 0;" />
-                                        <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-plus-square" style="color:#049bba"></i> พื้นที่ <?php echo $ipro->square_meter ?> ตร.ม,
-                                            <?php echo $ipro->square_wah ?> ตร.วา</p>
+                                        <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-plus-square" style="color:#049bba"></i> พื้นที่
+                                            <?php
+                                            if ($ipro->square_meter == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_meter;
+                                            }
+                                            ?> ตร.ม,
+                                            <?php if ($ipro->square_rai == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_rai;
+                                            }
+                                            ?> ไร่,
+                                            <?php
+                                            if ($ipro->square_ngan == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_ngan;
+                                            } ?> งาน,
+                                            <?php
+                                            if ($ipro->square_wah == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_wah;
+                                            }
+                                            ?> ตร.วา</p>
                                         <hr style="margin: 0.3rem 0;" />
                                         <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-credit-card" style="color:#049bba"></i> มูลค่าทรัพย์ <?php
                                                                                                                                                                 if ($ipro->p_price == '') {
@@ -343,7 +443,7 @@
                         <?php if ($ipro->type_product == '1') { ?>
                             <div class="item">
                                 <div class="card">
-                                <?php if ($ipro->status_match == "available") { ?>
+                                    <?php if ($ipro->status_match == "available") { ?>
                                         <img src="<?php echo base_url('property/' . $ipro->p_code . '/' . $ipro->p_image); ?>" alt="properties" style="width:100%;text-align:center;" />
                                     <?php } else { ?>
                                         <div style=" background-color: red;background-image:url('<?php echo base_url('property/' . $ipro->p_code . '/' . $ipro->p_image); ?>');
@@ -374,7 +474,33 @@
                                         <hr style="margin: 0.3rem 0;" />
                                         <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-geo-alt" style="color:#049bba"></i> <?php echo $ipro->district . ',' . $ipro->supdistrict ?></p>
                                         <hr style="margin: 0.3rem 0;" />
-                                        <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-plus-square" style="color:#049bba"></i> พื้นที่ <?php echo $ipro->square_wah ?> ตร.วา</p>
+                                        <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-plus-square" style="color:#049bba"></i> พื้นที่
+                                            <?php
+                                            if ($ipro->square_meter == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_meter;
+                                            }
+                                            ?> ตร.ม,
+                                            <?php if ($ipro->square_rai == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_rai;
+                                            }
+                                            ?> ไร่,
+                                            <?php
+                                            if ($ipro->square_ngan == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_ngan;
+                                            } ?> งาน,
+                                            <?php
+                                            if ($ipro->square_wah == '') {
+                                                echo "-";
+                                            } else {
+                                                echo $ipro->square_wah;
+                                            }
+                                            ?> ตร.วา</p>
                                         <hr style="margin: 0.3rem 0;" />
                                         <p style="font-size: 13px; margin-bottom: 0rem;"><i class="bi bi-credit-card" style="color:#049bba"></i> มูลค่าทรัพย์
                                             <?php

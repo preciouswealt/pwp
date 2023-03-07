@@ -109,6 +109,11 @@ class Home extends CI_Controller
 	{
 		$data['province'] = $this->Homemodel->province();
 		$data['properties'] = $this->Homemodel->propertiesdetail($ID_A);
+		foreach ($data['properties'] as $dt) {
+			$p_id	= $dt->p_id;
+			$p_code	= $dt->p_code;
+		}
+		$data['images'] = $this->Homemodel->imageproperty($p_id, $p_code);
 		// $data['properties'] = $this->Homemodel->properties();
 		$data['ShowPage'] = 'Consignment/Detail_consignmentpage';
 		$this->load->view('Indexview', $data);
@@ -116,7 +121,7 @@ class Home extends CI_Controller
 	public function Mortgage()
 	{
 		$IDtype = '2';
-		
+
 		$typeproperties = $this->input->GET('typeproperties');
 
 		$province = $this->input->GET('province');
@@ -188,6 +193,11 @@ class Home extends CI_Controller
 	{
 		$data['province'] = $this->Homemodel->province();
 		$data['properties'] = $this->Homemodel->propertiesdetail($ID_A);
+		foreach ($data['properties'] as $dt) {
+			$p_id	= $dt->p_id;
+			$p_code	= $dt->p_code;
+		}
+		$data['images'] = $this->Homemodel->imageproperty($p_id, $p_code);
 
 		// $data['properties'] = $this->Homemodel->properties();
 		$data['ShowPage'] = 'Mortgage/Detail_mortgagepage';
@@ -196,7 +206,7 @@ class Home extends CI_Controller
 	public function rentproperty()
 	{
 		$IDtype = '3';
-	
+
 		$typeproperties = $this->input->GET('typeproperties');
 
 		$province = $this->input->GET('province');
@@ -268,15 +278,20 @@ class Home extends CI_Controller
 	{
 		$data['province'] = $this->Homemodel->province();
 		$data['properties'] = $this->Homemodel->propertiesdetail($ID_A);
+		foreach ($data['properties'] as $dt) {
+			$p_id	= $dt->p_id;
+			$p_code	= $dt->p_code;
+		}
+		$data['images'] = $this->Homemodel->imageproperty($p_id, $p_code);
 		// $data['properties'] = $this->Homemodel->properties();
 		$data['ShowPage'] = 'Rentproperty/Detail_rentpropertypage';
 		$this->load->view('Indexview', $data);
 	}
 	public function propertysale()
 	{
-		$IDtype = '4'; 
+		$IDtype = '4';
 		//('4','6','7','8');
-	
+
 		$typeproperties = $this->input->GET('typeproperties');
 
 		$province = $this->input->GET('province');
@@ -347,6 +362,12 @@ class Home extends CI_Controller
 	{
 		$data['province'] = $this->Homemodel->province();
 		$data['properties'] = $this->Homemodel->propertiesdetail($ID_A);
+
+		foreach ($data['properties'] as $dt) {
+			$p_id	= $dt->p_id;
+			$p_code	= $dt->p_code;
+		}
+		$data['images'] = $this->Homemodel->imageproperty($p_id, $p_code);
 		// $data['properties'] = $this->Homemodel->properties();
 		$data['ShowPage'] = 'Propertysale/Detail_propertysale';
 		$this->load->view('Indexview', $data);
@@ -370,13 +391,13 @@ class Home extends CI_Controller
 		$province = $this->input->post('province');
 		$dristrict = $this->input->post('dristrict');
 		$sub_dristrict = $this->input->post('sub_dristrict');
-		
-		if($typeproties == '1'){
+
+		if ($typeproties == '1') {
 			$idran = rand(0, 99999);
-			$idcode = "CM-".$idran;
-		}else{
+			$idcode = "CM-" . $idran;
+		} else {
 			$idran = rand(0, 99999);
-			$idcode = "MG-".$idran;
+			$idcode = "MG-" . $idran;
 		}
 		// $insdeed = $this->input->post('filedeed');
 		// $ins = $this->input->post('formFileLg');
@@ -386,25 +407,25 @@ class Home extends CI_Controller
 				$dateSv = date('ymd');
 				$type = strrchr($_FILES['filedeed']['name'][$i], ".");
 				$newnamefile = rand(0, 999999);
-				$filedeed =  $dateSv.$newnamefile . $type;
+				$filedeed =  $dateSv . $newnamefile . $type;
 				// $filedeed =  $_FILES['filedeed']['name'][$i];
 				$_FILES['file']['name'] = $filedeed;
 				$_FILES['file']['type'] = $_FILES['filedeed']['type'][$i];
 				$_FILES['file']['tmp_name'] = $_FILES['filedeed']['tmp_name'][$i];
 				$_FILES['file']['error'] = $_FILES['filedeed']['error'][$i];
 				$_FILES['file']['size'] = $_FILES['filedeed']['size'][$i];
-				$config['upload_path']          = './deed/'.$idcode;
+				$config['upload_path']          = './deed/' . $idcode;
 				$config['allowed_types']         = 'pdf|Pdf|jpg|jpeg|png';
 				$config['remove_spaces'] = 'FALSE';
 
 				$this->load->library('upload', $config);
 				$this->upload->initialize($config);
-				if(!is_dir('./deed/'.$idcode)) {
-					mkdir('./deed/'.$idcode, 0777, true);
+				if (!is_dir('./deed/' . $idcode)) {
+					mkdir('./deed/' . $idcode, 0777, true);
 				}
 
 				if ($this->upload->do_upload('file')) {
-					$this->Homemodel->inserttouchimagedeed($filedeed,$idcode);
+					$this->Homemodel->inserttouchimagedeed($filedeed, $idcode);
 					$uploadData = $this->upload->data();
 				}
 			}
@@ -416,27 +437,26 @@ class Home extends CI_Controller
 				$dateSv = date('ymd');
 				$type = strrchr($_FILES['formFileLg']['name'][$i], ".");
 				$newnamefile = rand(0, 999999);
-				$formFileLg =  $dateSv.$newnamefile . $type;
+				$formFileLg =  $dateSv . $newnamefile . $type;
 				// $formFileLg =  $_FILES['formFileLg']['name'][$i];
 				$_FILES['file']['name'] = $formFileLg;
 				$_FILES['file']['type'] = $_FILES['formFileLg']['type'][$i];
 				$_FILES['file']['tmp_name'] = $_FILES['formFileLg']['tmp_name'][$i];
 				$_FILES['file']['error'] = $_FILES['formFileLg']['error'][$i];
 				$_FILES['file']['size'] = $_FILES['formFileLg']['size'][$i];
-				$config['upload_path']          = './imagehome/'.$idcode;
+				$config['upload_path']          = './imagehome/' . $idcode;
 				$config['allowed_types']         = 'pdf|Pdf|jpg|jpeg|png';
 				$config['remove_spaces'] = 'FALSE';
-			
+
 				$this->load->library('upload', $config);
 				$this->upload->initialize($config);
-	
-				if(!is_dir('./imagehome/'.$idcode)) {
-					mkdir('./imagehome/'.$idcode, 0777, true);
+
+				if (!is_dir('./imagehome/' . $idcode)) {
+					mkdir('./imagehome/' . $idcode, 0777, true);
 				}
 				if ($this->upload->do_upload('file')) {
-					$this->Homemodel->inserttouchimage($formFileLg,$idcode);
+					$this->Homemodel->inserttouchimage($formFileLg, $idcode);
 					$uploadData = $this->upload->data();
-				
 				}
 			}
 		}
@@ -452,33 +472,39 @@ class Home extends CI_Controller
 		// $dristrict 
 		// $sub_dristrict 
 
-		$insert = $this->Homemodel->inserttouchtomoney($txtFirstName, $txtLastName, $phone
-		, $idline, $typeproties, $dealing_file_no, $number,$idcode,$province,$dristrict,$sub_dristrict);
+		$insert = $this->Homemodel->inserttouchtomoney(
+			$txtFirstName,
+			$txtLastName,
+			$phone,
+			$idline,
+			$typeproties,
+			$dealing_file_no,
+			$number,
+			$idcode,
+			$province,
+			$dristrict,
+			$sub_dristrict
+		);
 
 		// $insert = true;
 		$data = array('success' => false, 'msg' => 'Form has been not submitted');
 		if ($insert) {
 			$data = array(
-				'success' => true, 'msg' => 'Form has been submitted successfully'
-				, 'txtFirstName' => $txtFirstName 
-				, 'txtLastName' => $txtLastName
-				, 'typeproties' => $typeproties
-				, 'number' => $number
-				, 'idcode' => $idcode
+				'success' => true, 'msg' => 'Form has been submitted successfully', 'txtFirstName' => $txtFirstName, 'txtLastName' => $txtLastName, 'typeproties' => $typeproties, 'number' => $number, 'idcode' => $idcode
 			);
 		}
 		echo json_encode($data);
 	}
 	public function stepnext($idcode)
 	{
-        $data['detailtouch'] = $this->Homemodel->detailtouchtomoney($idcode);
+		$data['detailtouch'] = $this->Homemodel->detailtouchtomoney($idcode);
 		$data['ShowPage'] = 'Touchtomoney/Detailstepnext';
 		$this->load->view('Indexview', $data);
 	}
 	public function propertyproject()
 	{
 		$IDtype = '5';
-	
+
 		$typeproperties = $this->input->GET('typeproperties');
 
 		$province = $this->input->GET('province');
@@ -549,6 +575,11 @@ class Home extends CI_Controller
 	{
 		// $data['properties'] = $this->Homemodel->properties();
 		$data['properties'] = $this->Homemodel->propertiesdetail($ID_A);
+		foreach ($data['properties'] as $dt) {
+			$p_id	= $dt->p_id;
+			$p_code	= $dt->p_code;
+		}
+		$data['images'] = $this->Homemodel->imageproperty($p_id, $p_code);
 		$data['ShowPage'] = 'Propertyproject/Detail_propertyprojectpage';
 		$this->load->view('Indexview', $data);
 	}

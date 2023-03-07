@@ -29,18 +29,22 @@
                 </div>
                 <div class="col-md-3">
                     <div class="mb-2">
-                        <p><b>รหัส product </b></p>
+                        <p><b>รหัส product </b>  <span class="text-danger bg-light" id="codepoduct_CHK"></p>
                         <div>
-                            <input type="text" name="codepoduct" id="codepoduct" style="border: 1px solid #0597b5;" class="form-control"  placeholder="รหัส product">
+                            <!-- <input type="text" name="codepoduct" id="codepoduct" style="border: 1px solid #0597b5;" class="form-control"  placeholder="รหัส product"> -->
+                            <input type="text" style="border: 1px solid #c1272d;margin-bottom:0px" maxlength="9" oninput="VALIDATE_p_id('<?php echo site_url('Control_admin/Checkp_id') ?>',this.value,this.id)" class="form-control csscal" name="codepoduct" id="codepoduct"  required>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="mb-2">
-                        <p><b>รหัส ทรัพย์ </b></p>
+                        <p><b>รหัส ทรัพย์</b> <span class="text-danger bg-light" id="codeproperty_CHK"></span></p>
 
                         <div>
-                            <input type="text" name="codeproperty" id="codeproperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="รหัส ทรัพย์">
+
+                            <!-- <input type="text" name="codeproperty" id="codeproperty" style="border: 1px solid #0597b5;" class="form-control"  placeholder="รหัส ทรัพย์"> -->
+
+                            <input type="text" style="border: 1px solid #c1272d;margin-bottom:0px" maxlength="8" oninput="VALIDATE_p_code('<?php echo site_url('Control_admin/Checkp_code') ?>',this.value,this.id)" class="form-control csscal" name="codeproperty" id="codeproperty"  required>
                         </div>
                     </div>
                 </div>
@@ -316,6 +320,7 @@
             for (instance in CKEDITOR.instances) {
                 CKEDITOR.instances[instance].updateElement();
             }
+           
             // alert('tttt');
             // e.preventDefault();
             // for (instance in CKEDITOR.instances) {
@@ -395,6 +400,9 @@
                 datas.append("imageproperty2[]", document.getElementById('imageproperty2').files[x]);
             }
 
+            if(codepoduct.length  < 8   || codeproperty.length != 8){
+                alert('tttt');
+            }else{
 
             swal({
                 title: "แน่ใจหรือไม่ ?",
@@ -438,9 +446,11 @@
                         "error");
                 }
             });
-
+        }
         });
-    });
+   
+   
+     });
 
     function getdistrict(v) {
         $.getJSON('<?php echo site_url('Control_admin/getdistrict?dis=') ?>' + v, function(res) {
@@ -475,5 +485,44 @@
                 $('#postcode').append('<option value="' + res[i].zipcode + '">' + res[i].zipcode + '</option>');
             }
         });
+    }
+
+    var logoERR = '<i  class="fa fa-times-circle text-danger"></i>';
+    var logosuccess = '<i class="fa fa-check-circle text-success"></i>';
+    var logoLoading = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span>';
+
+    function VALIDATE_p_code(_url, value, el) {
+        if (value == "") {
+            $("#" + el + "_CHK").html("");
+        } else {
+            // $("#" + el + "_CHK").html(logoLoading);
+            $.getJSON(_url + "?p_code=" + value, function(res) {
+                status_idcard = res[0].Result;
+                const result = res[0].Result;
+                if (result == "FALSE") {
+                    $("#" + el + "_CHK").html(logoERR);
+                } else {
+                    $("#" + el + "_CHK").html(logosuccess);
+                   
+                }
+            });
+        }
+    }
+    function VALIDATE_p_id(_url, value, el) {
+        if (value == "") {
+            $("#" + el + "_CHK").html("");
+        } else {
+            // $("#" + el + "_CHK").html(logoLoading);
+            $.getJSON(_url + "?p_id=" + value, function(res) {
+                status_idcard = res[0].Result;
+                const result = res[0].Result;
+                if (result == "FALSE") {
+                    $("#" + el + "_CHK").html(logoERR);
+                } else {
+                    $("#" + el + "_CHK").html(logosuccess);
+                   
+                }
+            });
+        }
     }
 </script>

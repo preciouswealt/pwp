@@ -14,10 +14,21 @@
 
                                 <?php if ($r->status_match == "available") { ?>
                                     <img src="<?php echo base_url('property/' . $r->p_code . '/' . $r->p_image); ?>" alt="properties" style="width:70%;text-align:center;" />
+
+
+
                                 <?php } else { ?>
                                     <div style=" background-color: red;background-image:url('<?php echo base_url('property/' . $r->p_code . '/' . $r->p_image); ?>');
     background-size:cover; background-position: center;display: grid;align-content:center;justify-content:center;opacity:0.5;width: 41vw;height: 62vh;">
                                         <h1 style="color:red;">MATCH</h1>
+                                    </div>
+
+                                    <div class="w3-content w3-display-container">
+                                        <?php foreach ($images as $rimg) { ?>
+                                            <img class="mySlides" src="<?php echo base_url('property/' . $rimg->p_code . '/' . $rimg->imagesname); ?>" alt="properties" style="width:70%;text-align:center;" />
+                                        <?php } ?>
+                                        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                                        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
                                     </div>
                                 <?php } ?>
                             </div>
@@ -35,7 +46,33 @@
                                 <hr style="margin: 0.3rem 0;" />
                                 <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-geo-alt" style="color:#049bba"></i> <?php echo $r->p_address ?></p>
                                 <hr style="margin: 0.3rem 0;" />
-                                <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-plus-square" style="color:#049bba"></i> พื้นที่ <?php echo $r->square_wah ?> ตร.วา</p>
+                                <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-plus-square" style="color:#049bba"></i> พื้นที่
+                                    <?php
+                                    if ($r->square_meter == '') {
+                                        echo "-";
+                                    } else {
+                                        echo $r->square_meter;
+                                    }
+                                    ?> ตร.ม,
+                                    <?php if ($r->square_rai == '') {
+                                        echo "-";
+                                    } else {
+                                        echo $r->square_rai;
+                                    }
+                                    ?> ไร่,
+                                    <?php
+                                    if ($r->square_ngan == '') {
+                                        echo "-";
+                                    } else {
+                                        echo $r->square_ngan;
+                                    } ?> งาน,
+                                    <?php
+                                    if ($r->square_wah == '') {
+                                        echo "-";
+                                    } else {
+                                        echo $r->square_wah;
+                                    }
+                                    ?> ตร.วา </p>
                                 <hr style="margin: 0.3rem 0;" />
                                 <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-credit-card" style="color:#049bba"></i> มูลค่าทรัพย์ <?php echo $r->p_price ?> บาท</p>
                                 <hr style="margin: 0.3rem 0;" />
@@ -95,34 +132,57 @@
 <br />
 
 <script>
-    let slideIndex = 1;
-    showSlides(slideIndex);
+    // let slideIndex = 1;
+    // showSlides(slideIndex);
 
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
+    // function plusSlides(n) {
+    //     showSlides(slideIndex += n);
+    // }
+
+    // function currentSlide(n) {
+    //     showSlides(slideIndex = n);
+    // }
+
+    // function showSlides(n) {
+    //     let i;
+    //     let slides = document.getElementsByClassName("mySlides");
+    //     let dots = document.getElementsByClassName("dot");
+    //     if (n > slides.length) {
+    //         slideIndex = 1
+    //     }
+    //     if (n < 1) {
+    //         slideIndex = slides.length
+    //     }
+    //     for (i = 0; i < slides.length; i++) {
+    //         slides[i].style.display = "none";
+    //     }
+    //     for (i = 0; i < dots.length; i++) {
+    //         dots[i].className = dots[i].className.replace(" active", "");
+    //     }
+    //     slides[slideIndex - 1].style.display = "block";
+    //     dots[slideIndex - 1].className += " active";
+    // }
+
+
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
     }
 
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) {
             slideIndex = 1
         }
         if (n < 1) {
-            slideIndex = slides.length
+            slideIndex = x.length
         }
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
         }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
+        x[slideIndex - 1].style.display = "block";
     }
 </script>

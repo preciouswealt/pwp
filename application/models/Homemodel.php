@@ -13,65 +13,75 @@ class Homemodel extends CI_Model
 	}
 	public function propertieshome1()
 	{
-		$query = "SELECT PR.id,p_id,p_code,p_name,p_detail,p_address,p_province,p_district,p_subdistrict,p_image
-		,p_status,p_savedate,p_updatedate,p_typeproperties,p_postcode,p_deed,p_pagedeed,status_match,square_wah,square_meter
-		,type_product,p_price,percen,P.name_th as province  ,D.name_th as district ,SD.name_th as supdistrict,SD.zipcode ,PR.price_limit 
+		$query = "SELECT PR.id,PR.p_id,PR.p_code,p_name,p_detail,p_address,p_province,p_district,p_subdistrict,IMG.imagesname as p_image
+		,p_status,p_savedate,p_updatedate,p_typeproperties,p_postcode,p_deed,p_pagedeed,status_match,square_wah,square_meter,square_rai,
+		square_ngan 
+		,type_product,p_price,percen,P.name_th as province  ,D.name_th as district ,SD.name_th as supdistrict,SD.zipcode,PR.price_limit 
 		FROM properties as PR 
 		INNER JOIN th_province as P ON PR.p_province = P.id 
 		INNER JOIN th_district as D ON PR.p_district = D.id 
 		INNER JOIN th_subdistrict as SD ON PR.p_subdistrict = SD.id   
+		INNER JOIN image_property as IMG on  PR.p_id  = IMG.p_id and PR.p_code  = IMG.p_code  and IMG.status  = 2  
 		where PR.p_status = '1' and PR.type_product = '1' limit 5";
 		//  SELECT * FROM properties  where p_status = '1' and type_product = '1' limit 5
 		return $this->db->query($query)->result();
 	}
 	public function propertieshome2()
 	{
-		$query = "SELECT PR.id,p_id,p_code,p_name,p_detail,p_address,p_province,p_district,p_subdistrict,p_image
-		,p_status,p_savedate,p_updatedate,p_typeproperties,p_postcode,p_deed,p_pagedeed,status_match,square_wah,square_meter
+		$query = "SELECT PR.id,PR.p_id,PR.p_code,p_name,p_detail,p_address,p_province,p_district,p_subdistrict,IMG.imagesname as p_image
+		,p_status,p_savedate,p_updatedate,p_typeproperties,p_postcode,p_deed,p_pagedeed,status_match,square_wah,square_meter,square_rai,
+		square_ngan 
 		,type_product,p_price,percen,P.name_th as province  ,D.name_th as district ,SD.name_th as supdistrict,SD.zipcode,PR.price_limit 
 		FROM properties as PR 
 		INNER JOIN th_province as P ON PR.p_province = P.id 
 		INNER JOIN th_district as D ON PR.p_district = D.id 
 		INNER JOIN th_subdistrict as SD ON PR.p_subdistrict = SD.id   
+		INNER JOIN image_property as IMG on  PR.p_id  = IMG.p_id and PR.p_code  = IMG.p_code  and IMG.status  = 2 
 		where PR.p_status = '1' and PR.type_product = '2' limit 5";
 		// $query = "SELECT * FROM properties  where p_status = '1' and type_product = '2' limit 5  ";
 		return $this->db->query($query)->result();
 	}
 	public function propertieshome3()
 	{
-		$query = "SELECT PR.id,p_id,p_code,p_name,p_detail,p_address,p_province,p_district,p_subdistrict,p_image
-		,p_status,p_savedate,p_updatedate,p_typeproperties,p_postcode,p_deed,p_pagedeed,status_match,square_wah,square_meter
+		$query = "SELECT PR.id,PR.p_id,PR.p_code,p_name,p_detail,p_address,p_province,p_district,p_subdistrict,IMG.imagesname as p_image
+		,p_status,p_savedate,p_updatedate,p_typeproperties,p_postcode,p_deed,p_pagedeed,status_match,square_wah,square_meter,square_rai,
+		square_ngan 
 		,type_product,p_price,percen,P.name_th as province  ,D.name_th as district ,SD.name_th as supdistrict,SD.zipcode,PR.price_limit 
 		FROM properties as PR 
 		INNER JOIN th_province as P ON PR.p_province = P.id 
 		INNER JOIN th_district as D ON PR.p_district = D.id 
 		INNER JOIN th_subdistrict as SD ON PR.p_subdistrict = SD.id   
+		INNER JOIN image_property as IMG on  PR.p_id  = IMG.p_id and PR.p_code  = IMG.p_code  and IMG.status  = 2  
 		where PR.p_status = '1' and PR.type_product = '3' limit 5";
 		// $query = "SELECT * FROM properties  where p_status = '1' and type_product = '3' limit 5  ";
 		return $this->db->query($query)->result();
 	}
 	public function propertieshome4()
 	{
-		$query = "SELECT PR.id,p_id,p_code,p_name,p_detail,p_address,p_province,p_district,p_subdistrict,p_image
-		,p_status,p_savedate,p_updatedate,p_typeproperties,p_postcode,p_deed,p_pagedeed,status_match,square_wah,square_meter
-		,type_product,p_price,percen,P.name_th as province  ,D.name_th as district ,SD.name_th as supdistrict,SD.zipcode ,PR.price_limit
+		$query = "SELECT PR.id,PR.p_id,PR.p_code,p_name,p_detail,p_address,p_province,p_district,p_subdistrict,IMG.imagesname as p_image
+		,p_status,p_savedate,p_updatedate,p_typeproperties,p_postcode,p_deed,p_pagedeed,status_match,square_wah,square_meter,square_rai,
+		square_ngan 
+		,type_product,p_price,percen,P.name_th as province  ,D.name_th as district ,SD.name_th as supdistrict,SD.zipcode,PR.price_limit 
 		FROM properties as PR 
 		INNER JOIN th_province as P ON PR.p_province = P.id 
 		INNER JOIN th_district as D ON PR.p_district = D.id 
 		INNER JOIN th_subdistrict as SD ON PR.p_subdistrict = SD.id   
+		INNER JOIN image_property as IMG on  PR.p_id  = IMG.p_id and PR.p_code  = IMG.p_code  and IMG.status  = 2
 		where PR.p_status = '1' and PR.type_product in ('4','6','7','8') limit 5";
 		// $query = "SELECT * FROM properties  where p_status = '1' and type_product = '4' limit 5  ";
 		return $this->db->query($query)->result();
 	}
 	public function propertieshome5()
 	{
-		$query = "SELECT PR.id,p_id,p_code,p_name,p_detail,p_address,p_province,p_district,p_subdistrict,p_image
-		,p_status,p_savedate,p_updatedate,p_typeproperties,p_postcode,p_deed,p_pagedeed,status_match,square_wah,square_meter
+		$query = "SELECT PR.id,PR.p_id,PR.p_code,p_name,p_detail,p_address,p_province,p_district,p_subdistrict,IMG.imagesname as p_image
+		,p_status,p_savedate,p_updatedate,p_typeproperties,p_postcode,p_deed,p_pagedeed,status_match,square_wah,square_meter,square_rai,
+		square_ngan 
 		,type_product,p_price,percen,P.name_th as province  ,D.name_th as district ,SD.name_th as supdistrict,SD.zipcode,PR.price_limit 
 		FROM properties as PR 
 		INNER JOIN th_province as P ON PR.p_province = P.id 
 		INNER JOIN th_district as D ON PR.p_district = D.id 
 		INNER JOIN th_subdistrict as SD ON PR.p_subdistrict = SD.id   
+		INNER JOIN image_property as IMG on  PR.p_id  = IMG.p_id and PR.p_code  = IMG.p_code  and IMG.status  = 2
 		where PR.p_status = '1' and PR.type_product = '5' limit 5";
 
 		// $query = "SELECT * FROM properties  where p_status = '1' and type_product = '5' limit 5  ";
@@ -125,19 +135,22 @@ class Homemodel extends CI_Model
 			$type_product = "T.type_product = '".$IDtype."'";
 		}
 		// $query = "SELECT * FROM properties  where p_status = '1' And type_product = '$IDtype'  LIMIT $per_pages OFFSET $page ";
-		$query = "SELECT T.id ,T.p_id ,T.p_code,T.p_name ,T.p_detail ,T.p_address ,T.p_province,T.p_image,T.p_district ,T.p_subdistrict ,T.p_status ,T.p_savedate ,T.p_updatedate,
-			T.p_postcode ,T.p_deed ,T.p_deed,T.percen ,T.status_match ,T.square_wah ,T.type_product ,T.p_typeproperties , T.p_price ,T.square_meter ,
+		$query = "SELECT T.id ,T.p_id ,T.p_code,T.p_name ,T.p_detail ,T.p_address ,T.p_province,IMG.imagesname as p_image,T.p_district ,T.p_subdistrict ,T.p_status ,T.p_savedate ,T.p_updatedate,
+			T.p_postcode ,T.p_deed ,T.p_deed,T.percen ,T.status_match ,T.square_wah ,T.type_product ,T.p_typeproperties , T.p_price ,T.square_meter,T.square_rai,
+			T.square_ngan  ,
 			P.name_th as province ,D.name_th as district ,SUP.name_th as supdistrict,SUP.zipcode,T.price_limit  FROM properties as T 
 			INNER JOIN th_province AS P ON T.p_province = P.id 
 			INNER JOIN th_district AS D ON T.p_province = D.province_id AND T.p_district = D.id 
 			INNER JOIN th_subdistrict AS SUP ON T.p_province = D.province_id AND T.p_district = SUP.district_id AND T.p_subdistrict = SUP.id
+			INNER JOIN image_property as IMG on  T.p_id  = IMG.p_id and T.p_code  = IMG.p_code  and IMG.status  = 2
 			WHERE $type_product and T.p_status = '1' $typepropertiess $provinces  $dristricts $sub_dristricts  $sizes   $statusmatchs LIMIT $per_pages OFFSET $page";
 		return $this->db->query($query)->result();
 	}
 	public function propertiesdetail($IDtype)
 	{
 		$query = "SELECT T.id ,T.p_id ,T.p_code,T.p_name ,T.p_detail ,T.p_address ,T.p_province,T.p_image,T.p_district ,T.p_subdistrict ,T.p_status ,T.p_savedate ,T.p_updatedate,
-			T.p_postcode ,T.p_deed ,T.p_deed,T.percen ,T.status_match ,T.square_wah ,T.type_product, T.p_price,T.square_meter ,
+			T.p_postcode ,T.p_deed ,T.p_deed,T.percen ,T.status_match ,T.square_wah ,T.type_product, T.p_price,T.square_meter ,T.square_rai,
+			T.square_ngan  ,
 			P.name_th as province ,D.name_th as district ,SUP.name_th as supdistrict,SUP.zipcode,T.price_limit  FROM properties as T 
 			INNER JOIN th_province AS P ON T.p_province = P.id 
 			INNER JOIN th_district AS D ON T.p_province = D.province_id AND T.p_district = D.id 
@@ -145,6 +158,12 @@ class Homemodel extends CI_Model
 			WHERE T.id = '$IDtype'";
 		return $this->db->query($query)->result();
 	}
+	public function imageproperty($p_id,$p_code)
+	{
+		$query = "SELECT * FROM image_property WHERE p_id  = '$p_id' and p_code = '$p_code'";
+		return $this->db->query($query)->result();
+	}
+	
 	public function aboutus()
 	{
 		$query = "SELECT * FROM aboutus where status_about = '1' ";
