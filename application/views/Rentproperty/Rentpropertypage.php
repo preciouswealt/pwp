@@ -1,7 +1,7 @@
 <div style="margin: 20px;">
     <div class="container">
         <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
-            <h2 style="text-align: center;">สัญญาเช่าอสังหาริมทรัพย์คืออะไร</h2>
+            <h2 style="text-align: center; text-shadow: 1px 1px 3px #000000;" >สัญญาเช่าอสังหาริมทรัพย์คืออะไร</h2>
             <p>สัญญาเช่าเป็นสัญญาต่างตอบแทนและไม่มีการโอนกรรมสิทธิ์ในทรัพย์สินที่เช่า
                 ผู้เช่าจึงมีสิทธิเพียงได้ใช้หรือได้รับประโยชน์ในทรัพย์สินในเวลาหนึ่งตามสัญญาเท่านั้น
                 สัญญาเช่าอสังหาริมทรัพย์กฎหมายให้ทำสัญญาเช่ากันนานที่สุดถึง 30 ปี จะทำเกิน 30 ปีไม่ได้
@@ -189,7 +189,7 @@
                                 <hr style="margin: 0.3rem 0;" />
                                 <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-coin" style="color:#049bba"></i> ดอกเบี้ย 90,000 บาท/ปี(9%) </p> -->
                             <hr style="margin: 0.3rem 0;" />
-                            <a
+                            <a onclick="loading()"
                                 href="<?php echo site_url('Detail_Rentproperty/' . $ipro->id . ''); ?>">...ดูรายละเอียด</a>
                         </div>
                     </div>

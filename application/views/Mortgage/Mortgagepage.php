@@ -1,10 +1,10 @@
 <div style="margin: 20px;">
     <div class="container">
         <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
-            <h2 style="text-align: center;">การจำนอง คืออะไร </h2>
-            <h3 style="text-align: center;">ความหมายของการจำนอง</h3>
+            <h2 style="text-align: center; text-shadow: 1px 1px 3px #000000;">การจำนอง คืออะไร </h2>
+            <h3 style="text-align: center; text-shadow: 1px 1px 3px #000000;">ความหมายของการจำนอง</h3>
 
-            <p>จำนอง คือ การที่บุคคลคนหนึ่งเรียกว่า “ผู้จำนอง” เอาอสังหาริมทรัพย์ของตน เช่น ที่ดินหรือทรัพย์ที่กฎหมายอนุญาตให้จำนองได้ ไปจดทะเบียนไว้กับบุคคลอีกคนหนึ่งเรียกว่า “ผู้รับจำนอง” เพื่อเป็นหลักประกันในการชำระหนี้ ทั้งนี้โดยผู้จำนองไม่ต้องส่งมอบที่ดินหรือทรัพย์สินดังกล่าวนั้นให้แก่ผู้ รับจำนอง
+           <b> <p>จำนอง คือ การที่บุคคลคนหนึ่งเรียกว่า “ผู้จำนอง” เอาอสังหาริมทรัพย์ของตน เช่น ที่ดินหรือทรัพย์ที่กฎหมายอนุญาตให้จำนองได้ ไปจดทะเบียนไว้กับบุคคลอีกคนหนึ่งเรียกว่า “ผู้รับจำนอง” เพื่อเป็นหลักประกันในการชำระหนี้ ทั้งนี้โดยผู้จำนองไม่ต้องส่งมอบที่ดินหรือทรัพย์สินดังกล่าวนั้นให้แก่ผู้ รับจำนอง
                 (ป.พ.พ. มาตรา 702)
             </p>
 
@@ -19,6 +19,7 @@
             <p>ข. แพ </p>
             <p>ค. สัตว์พาหนะ </p>
             <p>ง. สังหาริมทรัพย์อื่นๆ ซึ่งกฎหมายได้บัญญัติให้จดทะเบียนจำนองได้เช่น เครื่องจักรขนาดใหญ่เป็นต้น </p>
+           </b>
             <br />
             <form id="insurance" method="GET" action="<?php echo site_url("Home/mortgage") ?>">
                 <input type="hidden" name="IDtype" id="IDtype" value="2">
@@ -189,7 +190,7 @@
                                 <hr style="margin: 0.3rem 0;" />
                                 <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-coin" style="color:#049bba"></i> ดอกเบี้ย 90,000 บาท/ปี(9%) </p>-->
                                     <hr style="margin: 0.3rem 0;" />
-                                    <a href="<?php echo site_url('Detail_Mortgage/' . $ipro->id . ''); ?>">...ดูรายละเอียด</a>
+                                    <a onclick="loading()" href="<?php echo site_url('Detail_Mortgage/' . $ipro->id . ''); ?>">...ดูรายละเอียด</a>
                                 </div>
                             </div>
                             <!-- </?php echo $n->title; ?>

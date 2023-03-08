@@ -1,7 +1,7 @@
 <div style="margin: 20px;">
     <div class="container">
         <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
-            <h2 style="text-align: center;">สัญญาเช่าอสังหาริมทรัพย์คืออะไร</h2>
+            <h2 style="text-align: center; text-shadow: 1px 1px 3px #000000;">สัญญาเช่าอสังหาริมทรัพย์คืออะไร</h2>
             <br />
             <form id="insurance" method="GET" action="<?php echo site_url("Home/propertysale") ?>">
             <input type="hidden" name="IDtype" id="IDtype" value="4">
@@ -150,7 +150,7 @@
                                     <?php if ($ipro->status_match == "available") { ?>
                                         <span class="badge bg-success">Available</span>
                                     <?php } else { ?>
-                                        <span class="badge bg-danger">Done</span>
+                                        <span class="badge bg-danger">SOLD</span>
                                     <?php } ?>
                                 </div>
                                 <hr style="border: 0px;" />
@@ -166,7 +166,7 @@
                                 <hr style="margin: 0.3rem 0;" />
                                 <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-coin" style="color:#049bba"></i> ดอกเบี้ย 90,000 บาท/ปี(9%) </p> -->
                                 <hr style="margin: 0.3rem 0;" />
-                                <a href="<?php echo site_url('Detail_Propertysale/' . $ipro->id . ''); ?>">...ดูรายละเอียด</a>
+                                <a onclick="loading()" href="<?php echo site_url('Detail_Propertysale/' . $ipro->id . ''); ?>">...ดูรายละเอียด</a>
                             </div>
                         </div>
                         <!-- </?php echo $n->title; ?>

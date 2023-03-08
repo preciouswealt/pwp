@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                <button onclick="history.back()" class="btn btn-default">
+                <button onclick="history.back()" class="btn  btn-primary">
                     << ย้อนกลับ</button>
                         <?php foreach ($properties as $r) { ?>
 

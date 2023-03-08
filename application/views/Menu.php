@@ -27,75 +27,66 @@
     <div class="container d-flex align-items-center">
 
         <h5 class="logo me-auto" style="font-size: 20px;">
-            <a href="<?php echo site_url('Home') ?>">
+            <a onclick="loading()" href="<?php echo site_url('Home') ?>">
                 <!-- <span style="color:#049bba;">Precious</span> <span class="text-warning">wealth property</span> -->
-                <img src="<?php echo base_url('assets/img/PreciousWP-LOGOv1png.png'); ?>"
-                    style="width:100%;max-height: 150px;">
+                <img src="<?php echo base_url('assets/img/PreciousWP-LOGOv1png.png'); ?>" style="width:100%;max-height: 150px;">
             </a>
         </h5>
         <nav id="navbar" class="navbar">
             <ul>
-                <li class="nav-item active"><a class="nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
-                                                                            echo 'active';
-                                                                        } ?>"
-                        href="<?php echo site_url('Home') ?>">หน้าหลัก</a></li>
-                <li class="nav-item"><a class="nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
-                                                                        echo 'active';
-                                                                    } ?>"
-                        href="<?php echo site_url('aboutpage') ?>">เกี๋ยวกับเรา</a></li>
-                <li class="dropdown"><a href="#"><span>สินค้าและบริการ</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="nav-item active">
+                    <a onclick="loading()" style="text-shadow: 0px 1px 0px #000000;" class="nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
+                                                                                                                    echo 'active';
+                                                                                                                } ?>" href="<?php echo site_url('Home') ?>">หน้าหลัก</a>
+                </li>
+                <li class="nav-item"><a style="text-shadow: 0px 1px 0px #000000;" onclick="loading()" class="nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
+                                                                                                                                    echo 'active';
+                                                                                                                                } ?>" href="<?php echo site_url('aboutpage') ?>">เกี๋ยวกับเรา</a>
+                </li>
+                <li class="dropdown"><a style="text-shadow: 0px 1px 0px #000000;" href="#"><span>สินค้าและบริการ</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <!-- <li class="nav-item"><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li class="nav-item"><a href="</?php echo site_url('Consignment') ?>">ขายฝาก</a></li>
-                  <li class="nav-item"><a href="</?php echo site_url('Mortgage') ?>">จดจำนอง</a></li>
-                  <li class="nav-item"><a href="</?php echo site_url('Rentproperty') ?>">เช่าอสังหาริมทรัพย์</a></li>
-                  <li class="nav-item"><a href="</?php echo site_url('Propertysale') ?>">อสังหาริมทรัพย์ที่ประกาศขาย</a></li>
-                </ul>
-              </li> -->
-                        <li class="nav-item"><a class="<?php if ($this->uri->uri_string() == 'patient/listpatient') {
-                                                            echo 'active';
-                                                        } ?>" href="<?php echo site_url('Consignment') ?>">ขายฝาก</a>
+                        <li class="nav-item"><a style="text-shadow: 0px 1px 0px #000000;" onclick="loading()" class="<?php if ($this->uri->uri_string() == 'patient/listpatient') {
+                                                                                                                            echo 'active';
+                                                                                                                        } ?>" href="<?php echo site_url('Consignment') ?>">ขายฝาก</a>
                         </li>
-                        <li class="nav-item"><a class="<?php if ($this->uri->uri_string() == 'patient/listpatient') {
-                                                            echo 'active';
-                                                        } ?>" href="<?php echo site_url('Mortgage') ?>">จดจำนอง</a>
+                        <li class="nav-item"><a style="text-shadow: 0px 1px 0px #000000;" onclick="loading()" class="<?php if ($this->uri->uri_string() == 'patient/listpatient') {
+                                                                                                                            echo 'active';
+                                                                                                                        } ?>" href="<?php echo site_url('Mortgage') ?>">จดจำนอง</a>
                         </li>
-                        <li class="nav-item"><a class="<?php if ($this->uri->uri_string() == 'patient/listpatient') {
-                                                            echo 'active';
-                                                        } ?>"
-                                href="<?php echo site_url('Rentproperty') ?>">เช่าอสังหาริมทรัพย์</a></li>
-                        <li class="nav-item"><a class="<?php if ($this->uri->uri_string() == 'patient/listpatient') {
-                                                            echo 'active';
-                                                        } ?>"
-                                href="<?php echo site_url('Propertysale') ?>">อสังหาริมทรัพย์ที่ประกาศขาย</a></li>
+                        <li class="nav-item"><a style="text-shadow: 0px 1px 0px #000000;" onclick="loading()" class="<?php if ($this->uri->uri_string() == 'patient/listpatient') {
+                                                                                                                            echo 'active';
+                                                                                                                        } ?>" href="<?php echo site_url('Rentproperty') ?>">เช่าอสังหาริมทรัพย์</a>
+                        </li>
+                        <li class="nav-item"><a style="text-shadow: 0px 1px 0px #000000;" onclick="loading()" class="<?php if ($this->uri->uri_string() == 'patient/listpatient') {
+                                                                                                                            echo 'active';
+                                                                                                                        } ?>" href="<?php echo site_url('Propertysale') ?>">อสังหาริมทรัพย์ที่ประกาศขาย</a>
+                        </li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
-                                                                        echo 'active';
-                                                                    } ?>"
-                        href="<?php echo site_url('Touchtomoney') ?>">Touch to money</a></li>
-                <li class="nav-item"><a class="nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
-                                                                        echo 'active';
-                                                                    } ?>"
-                        href="<?php echo site_url('Propertyproject') ?>">โครงการทรัพย์ใหม่</a></li>
-                <li class="nav-item"><a class="nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
-                                                                        echo 'active';
-                                                                    } ?>"
-                        href="<?php echo site_url('News') ?>">ข่าวสาร</a></li>
-                <li class="nav-item"><a class="nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
-                                                                        echo 'active';
-                                                                    } ?>"
-                        href="<?php echo site_url('Even') ?>">อีเว้น</a></li>
-                <li class="nav-item"><a class="nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
-                                                                        echo 'active';
-                                                                    } ?>"
-                        href="<?php echo site_url('Contract') ?>">ติดต่อเรา</a></li>
-                <li class="nav-item"><a data-toggle="modal" disabled data-target="#exampleModal"
-                        style="    padding: 10px;color:#ffff;" class="btn btn-primary nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
-                                                                        echo 'active';
-                                                                    } ?>">เข้าสู่ระบบ</a>
+                <li class="nav-item"><a style="text-shadow: 0px 1px 0px #000000;" onclick="loading()" class="nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
+                                                                                                                                    echo 'active';
+                                                                                                                                } ?>" href="<?php echo site_url('Touchtomoney') ?>">Touch to money</a>
+                </li>
+                <li class="nav-item"><a style="text-shadow: 0px 1px 0px #000000;" onclick="loading()" class="nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
+                                                                                                                                    echo 'active';
+                                                                                                                                } ?>" href="<?php echo site_url('Propertyproject') ?>">โครงการทรัพย์ใหม่</a>
+                </li>
+                <li class="nav-item"><a style="text-shadow: 0px 1px 0px #000000;" onclick="loading()" class="nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
+                                                                                                                                    echo 'active';
+                                                                                                                                } ?>" href="<?php echo site_url('News') ?>">ข่าวสาร</a>
+                </li>
+                <li class="nav-item"><a style="text-shadow: 0px 1px 0px #000000;" onclick="loading()" class="nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
+                                                                                                                                    echo 'active';
+                                                                                                                                } ?>" href="<?php echo site_url('Even') ?>">อีเว้น</a>
+                </li>
+                <li class="nav-item"><a style="text-shadow: 0px 1px 0px #000000;" onclick="loading()" class="nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
+                                                                                                                                    echo 'active';
+                                                                                                                                } ?>" href="<?php echo site_url('Contract') ?>">ติดต่อเรา</a>
+                </li>
+                <li class="nav-item">
+                    <a onclick="loading()" data-toggle="modal" disabled data-target="#exampleModal" style="padding: 10px;color:#ffff;text-shadow: 0px 1px 0px #000000;" class="btn btn-primary nav-link scrollto <?php if ($this->uri->uri_string() == 'patient/listpatient') {
+                                                                                                                                                                                                                        echo 'active';
+                                                                                                                                                                                                                    } ?>">เข้าสู่ระบบ</a>
                     <!-- <a data-toggle="modal" data-target="#exampleModal"  style="    padding: 10px;color:#ffff;" class=" btn btn-primary nav-link scrollto </?php if ($this->uri->uri_string() == 'patient/listpatient') {
                                                                         echo 'active';
                                                                     } ?> disabled" >เข้าสู่ระบบ</a> -->
@@ -103,6 +94,5 @@
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
-
     </div>
 </header><!-- End Header -->

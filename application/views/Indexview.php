@@ -48,47 +48,88 @@
     <!-- <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script> -->
     <style type="text/css">
-        body {
-            font-family: 'Mitr', sans-serif;
-        }
+    body {
+        font-family: 'Mitr', sans-serif;
+    }
 
-        hr {
-            border: 0;
-            border-top: 3px solid #049bba;
-            ;
-            border-bottom: 1px solid #fff;
-        }
+    hr {
+        border: 0;
+        border-top: 3px solid #049bba;
+        ;
+        border-bottom: 1px solid #fff;
+    }
 
-        main {
-            flex: 1;
-        }
+    main {
+        flex: 1;
+    }
 
-        .wrapper {
-            display: block;
-            min-height: 100%;
-            /* real browsers */
-            height: auto !important;
-            /* real browsers */
+    .wrapper {
+        display: block;
+        min-height: 100%;
+        /* real browsers */
+        height: auto !important;
+        /* real browsers */
+        height: 100%;
+        /* IE6 bug */
+        margin-bottom: -20px;
+        /* กำหนด margin-bottom ให้ติดลบเท่ากับความสูงของ footer */
+    }
+
+    .footer {
+        height: 20px;
+        /* ความสูงของ footer */
+        display: block;
+        text-align: center;
+    }
+
+    .error {
+        color: #FF0000;
+    }
+
+    /* #overlay {
+            position: fixed;
+            background-color: transparent;
+            left: 0px;
+            top: 218px;
+            width: 100%;
             height: 100%;
-            /* IE6 bug */
-            margin-bottom: -20px;
-            /* กำหนด margin-bottom ให้ติดลบเท่ากับความสูงของ footer */
-        }
+            margin-left: 0%;
+            margin-right: 0%;
+        } */
+    #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.75) url(assets/img/loading2.gif) no-repeat center center;
+        z-index: 10000;
+    }
 
-        .footer {
-            height: 20px;
-            /* ความสูงของ footer */
-            display: block;
-            text-align: center;
-        }
+    div.img-resize img {
+	height: 64px;
+	width: auto;
+}
 
-        .error {
-            color: #FF0000;
-        }
+div.img-resize {
+	width: 64px;
+	height: 64px;
+	overflow: hidden;
+	text-align: center;
+}
+
+    
     </style>
 </head>
 
 <body>
+    <div id="overlay" style="display: none;text-align:center;z-index: 1001; ">
+        <!-- <img src="</?php echo base_url(); ?>assets/img/loading2.gif"> -->
+    </div>
+    <!-- <div id="loader"></div> -->
+
     <div class="wrapper">
         <?php $this->load->view('Menu'); ?>
     </div>
@@ -106,13 +147,17 @@ background: linear-gradient(160deg, rgba(34,193,195,1) 0%, rgba(8,94,172,1) 100%
                 <h3><span style="color:#fefefe;">Precious</span> <span class="text-warning">wealth property</span></h3>
                 <p></p>
                 <div class="social-links">
-                    <a href="https://web.facebook.com/preciouswealthproperty" target="_blank" class="facebook"><i class="bx bxl-facebook"></i></a>
-                    <a href="https://www.youtube.com/@preciouswealthproperty" target="_blank" class="youtube"><i class="bx bxl-youtube"></i></a>
-                    <a href="https://liff.line.me/1645278921-kWRPP32q/?accountId=909odigl"  target="_blank" class="line"><i class="bi bi-line"></i></a>
+                    <a href="https://web.facebook.com/preciouswealthproperty" target="_blank" class="facebook"><i
+                            class="bx bxl-facebook"></i></a>
+                    <a href="https://www.youtube.com/@preciouswealthproperty" target="_blank" class="youtube"><i
+                            class="bx bxl-youtube"></i></a>
+                    <a href="https://liff.line.me/1645278921-kWRPP32q/?accountId=909odigl" target="_blank"
+                        class="line"><i class="bi bi-line"></i></a>
 
                 </div>
                 <div class="copyright">
-                    &copy; Copyright <strong><span><span style="color:#049bba;">Precious</span> <span class="text-warning">wealth property</span></span></strong>
+                    &copy; Copyright <strong><span><span style="color:#049bba;">Precious</span> <span
+                                class="text-warning">wealth property</span></span></strong>
                 </div>
                 <div class="credits">
                 </div>
@@ -122,11 +167,14 @@ background: linear-gradient(160deg, rgba(34,193,195,1) 0%, rgba(8,94,172,1) 100%
     <!-- End Footer -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center" style="background: rgb(84,162,255);
-background: radial-gradient(circle, rgba(84,162,255,1) 0%, rgba(148,187,233,1) 100%);"><i class="bi bi-arrow-up-short"></i></a>
+background: radial-gradient(circle, rgba(84,162,255,1) 0%, rgba(148,187,233,1) 100%);"><i
+            class="bi bi-arrow-up-short"></i></a>
 
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
     <!-- Vendor JS Files -->
     <script src="<?php echo base_url(); ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/vendor/glightbox/js/glightbox.min.js"></script>
@@ -137,18 +185,23 @@ background: radial-gradient(circle, rgba(84,162,255,1) 0%, rgba(148,187,233,1) 1
     <!-- Template Main JS File -->
     <script src="<?php echo base_url(); ?>assets/js/main.js"></script>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered " role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title"  style="text-align:center; font-weight: 400; font-size: 20px; line-height: 17px; color: rgb(111, 114, 122);" id="exampleModalLabel">กรอกข้อมูลเพื่อเข้าสู่ระบบ</h3>
+                    <h3 class="modal-title"
+                        style="text-align:center; font-weight: 400; font-size: 20px; line-height: 17px; color: rgb(111, 114, 122);"
+                        id="exampleModalLabel">กรอกข้อมูลเพื่อเข้าสู่ระบบ</h3>
                     <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="modallogin__body">
-                        <div style="text-align:center; font-weight: 400; font-size: 12px; line-height: 17px; color: rgb(111, 114, 122);">เรารักษาข้อมูลของคุณเป็นความลับสูงสุด
+                        <div
+                            style="text-align:center; font-weight: 400; font-size: 12px; line-height: 17px; color: rgb(111, 114, 122);">
+                            เรารักษาข้อมูลของคุณเป็นความลับสูงสุด
                         </div>
                         <form autocomplete="off" class="ant-form ant-form-vertical ant-form-hide-required-mark">
                             <div class="row">
@@ -181,32 +234,45 @@ background: radial-gradient(circle, rgba(84,162,255,1) 0%, rgba(148,187,233,1) 1
 </html>
 
 <script>
-    $('.owl-carousel').owlCarousel({
-        items: 5,
-        // singleItem: true,
-        loop: false,
-        margin: 10,
-        autoplay: false,
-        autoplayTimeout: 1000,
-        autoplayHoverPause: false,
-        responsiveClass: false,
-        rtl: false,
-        responsive: {
-            0: {
-                items: 1
-            },
-            480: {
-                items: 1
-            },
-            600: {
-                items: 1
-            },
-            1000: {
-                items: 3
-            },
-            1500: {
-                items: 5
-            }
+function loading() {
+    document.getElementById('overlay').style.display = "block";
+}
+// setTimeout(function() {
+// //   $("#loading").show();
+// loading()
+// }, 500)
+
+// const myTimeout = setTimeout(loading, 5000);
+
+
+
+
+$('.owl-carousel').owlCarousel({
+    items: 5,
+    // singleItem: true,
+    loop: false,
+    margin: 10,
+    autoplay: false,
+    autoplayTimeout: 1000,
+    autoplayHoverPause: false,
+    responsiveClass: false,
+    rtl: false,
+    responsive: {
+        0: {
+            items: 1
+        },
+        480: {
+            items: 1
+        },
+        600: {
+            items: 1
+        },
+        1000: {
+            items: 3
+        },
+        1500: {
+            items: 5
         }
-    })
+    }
+})
 </script>

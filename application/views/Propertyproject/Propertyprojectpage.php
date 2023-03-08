@@ -1,7 +1,7 @@
 <div style="margin: 20px;">
     <div class="container">
         <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
-            <h2 style="text-align: center;">โครงการทรัพย์ใหม่</h2>
+            <h2 style="text-align: center; text-shadow: 1px 1px 3px #000000;" >โครงการทรัพย์ใหม่</h2>
             <br />
             <form id="insurance" method="GET" action="<?php echo site_url("Home/propertyproject") ?>">
             <input type="hidden" name="IDtype" id="IDtype" value="5">
@@ -165,7 +165,7 @@
                                 <hr style="margin: 0.3rem 0;" />
                                 <p style="font-size: 15px; margin-bottom: 0rem;"><i class="bi bi-coin" style="color:#049bba"></i> ดอกเบี้ย 90,000 บาท/ปี(9%) </p> -->
                                 <hr style="margin: 0.3rem 0;" />
-                                <a href="<?php echo site_url('Detail_Propertyproject/' . $ipro->id . ''); ?>">...ดูรายละเอียด</a>
+                                <a onclick="loading()" href="<?php echo site_url('Detail_Propertyproject/' . $ipro->id . ''); ?>">...ดูรายละเอียด</a>
                             </div>
                         </div>
                         <!-- </?php echo $n->title; ?>
